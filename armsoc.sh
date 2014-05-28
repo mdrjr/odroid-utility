@@ -62,7 +62,7 @@ armsoc_rebuild_debian() {
 	
 	# debian requires some extra packages to build the DDX. So.. lets install it
 	apt-get -y build-dep xserver-xorg-video-modesetting xserver-xorg-video-nouveau &>> $buildlog
-	apt-get -y install build-essential git xz-utils xserver-xorg-dev libudev-dev &>> &buildlog
+	apt-get -y install build-essential git xz-utils xserver-xorg-dev libudev-dev &>> $buildlog
 	
 	# Download the blobs
 	dlf builder.mdrjr.net/tools/mali-r4p0.txz "Downloading Mali Binaries" $root/mali-r4p0.tar.xz
