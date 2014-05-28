@@ -39,7 +39,7 @@ install_bootstrap_packages() {
 
         case "$DISTRO" in
                 "ubuntu")
-                        apt-get -y install axel build-essential git xz-utils whiptail
+                        apt-get -y install axel build-essential git xz-utils whiptail unzip
                         apt-get -y build-dep xserver-xorg-video-armsoc
                         ;;
 				*)
