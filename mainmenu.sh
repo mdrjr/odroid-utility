@@ -8,6 +8,7 @@ while true; do
 		"3" "Install/Update XBMC (Ubuntu Only)" \
 		"4" "Resize your root partition" \
 		"5" "Xorg On/Off" \
+		"6" "Rebuild Xorg armsoc DDX (fixes ABI errors) "\
 		3>&1 1>&2 2>&3)
 	
 	RET=$?
@@ -30,6 +31,9 @@ while true; do
 			;;
 		5) 
 			xorg_config 
+			;;
+		6)
+			rebuild_armsoc
 			;;
 		*) 
 			whiptail --msgbox "Error 001. Please report on the forums" 0 0 0

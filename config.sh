@@ -13,6 +13,7 @@ source $_B/hdmi.sh
 source $_B/kernel_update.sh
 source $_B/xbmc_setup.sh
 source $_B/xorg_config.sh
+source $_B/armsoc.sh
 
 # mainmenu should be the last one :)
 source $_B/mainmenu.sh
