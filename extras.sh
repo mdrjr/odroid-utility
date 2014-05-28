@@ -17,3 +17,7 @@ dlf() {
 	wget "$1" 2>&1 -O $3 | stdbuf -o0 awk '/[.] +[0-9][0-9]?[0-9]?%/ { print substr($0,63,3) }' | whiptail --gauge "$2" 0 0 100
 }
 
+msgbox() {
+	# $1 is the msg
+	whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --msgbox "$1" 0 0 0 
+}
