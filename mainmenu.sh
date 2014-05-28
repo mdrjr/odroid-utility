@@ -40,9 +40,9 @@ while true; do
 			change_hostname
 			;;
 		*) 
-			whiptail --msgbox "Error 001. Please report on the forums" 0 0 0
+			whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --msgbox "Error 001. Please report on the forums" 0 0 0
 			;;
-		esac || whiptail --msgbox "I don't know how you got here! >> $CC <<  Report on the forums" 0 0 0
+		esac || whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --msgbox "I don't know how you got here! >> $CC <<  Report on the forums" 0 0 0
 		
 	fi
 done
