@@ -43,7 +43,7 @@ install_bootstrap_packages() {
                         apt-get -y build-dep xserver-xorg-video-armsoc
                         ;;
 				*)
-				echo "Shouldn't reach here!"
+				echo "Shouldn't reach here! Please report this on the forums."
 				exit 0
 				;;
 		esac
