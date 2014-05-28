@@ -31,7 +31,7 @@ enable_xorg_at_boot() {
 	
 	if [ "$DISTRO" = "ubuntu" ]; then
 		rm -fr /etc/init/lightdm.override
-	elif
+	else
 	
 		xorg_err_not_supportted
 		
@@ -42,7 +42,7 @@ disable_xorg_at_boot() {
 	
 	if [ "$DISTRO" = "ubuntu" ]; then
 		echo "manual" > /etc/init/lightdm.override
-	elif
+	else
 
 		xorg_err_not_supportted
 
