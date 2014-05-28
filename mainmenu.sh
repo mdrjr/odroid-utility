@@ -15,30 +15,30 @@ while true; do
 	
 	if [ $RET -eq 1 ]; then
 		do_exit
-	elif [ $RET -eq 1 ]; then
+	elif [ $RET -eq 0 ]; then
 		case "$CC" in
-		1) 
+		"1") 
 			setup_hdmi 
 			;;
-		2) 
+		"2") 
 			kernel_update 
 			;;
-		3) 
+		"3") 
 			xbmc_setup 
 			;;
-		4) 
+		"4") 
 			fs_resize 
 			;;
-		5) 
+		"5") 
 			xorg_config 
 			;;
-		6)
+		"6")
 			rebuild_armsoc
 			;;
 		*) 
 			whiptail --msgbox "Error 001. Please report on the forums" 0 0 0
 			;;
-		esac || whiptail --msgbox "I don't know how you got here! $CC Report on the forums" 0 0 0
+		esac || whiptail --msgbox "I don't know how you got here! >> $CC <<  Report on the forums" 0 0 0
 		
 	fi
 done
