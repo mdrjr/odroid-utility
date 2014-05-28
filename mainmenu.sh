@@ -18,31 +18,15 @@ while true; do
 		do_exit
 	elif [ $RET -eq 0 ]; then
 		case "$CC" in
-		"1") 
-			setup_hdmi 
-			;;
-		"2") 
-			kernel_update 
-			;;
-		"3") 
-			xbmc_setup 
-			;;
-		"4") 
-			fs_resize 
-			;;
-		"5") 
-			xorg_config 
-			;;
-		"6")
-			rebuild_armsoc
-			;;
-		"7")
-			change_hostname
-			;;
-		*) 
-			whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --msgbox "Error 001. Please report on the forums" 0 0 0
-			;;
-		esac || whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --msgbox "I don't know how you got here! >> $CC <<  Report on the forums" 0 0 0
+		"1") setup_hdmi ;;
+		"2") kernel_update ;;
+		"3") xbmc_setup ;;
+		"4") fs_resize ;;
+		"5") xorg_config ;;
+		"6") rebuild_armsoc  ;;
+		"7") change_hostname ;;
+		*) msgbox "Error 001. Please report on the forums" ;;
+		esac || msgbox "I don't know how you got here! >> $CC <<  Report on the forums"
 		
 	fi
 done
