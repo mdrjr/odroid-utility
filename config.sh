@@ -5,6 +5,7 @@ _REV="1"
 
 # Some variables.
 REBOOT=0
+DATE=`date +%Y.%m.%d-%H.%M`
 
 # Load the scripts
 source $_B/extras.sh
