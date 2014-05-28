@@ -9,6 +9,7 @@ while true; do
 		"4" "Resize your root partition" \
 		"5" "Xorg On/Off" \
 		"6" "Rebuild Xorg armsoc DDX (fixes ABI errors) "\
+		"7" "Change Hostname" \
 		3>&1 1>&2 2>&3)
 	
 	RET=$?
@@ -34,6 +35,9 @@ while true; do
 			;;
 		"6")
 			rebuild_armsoc
+			;;
+		"7")
+			change_hostname
 			;;
 		*) 
 			whiptail --msgbox "Error 001. Please report on the forums" 0 0 0

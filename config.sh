@@ -15,6 +15,7 @@ source $_B/kernel_update.sh
 source $_B/xbmc_setup.sh
 source $_B/xorg_config.sh
 source $_B/armsoc.sh
+source $_B/change_hostname.sh
 
 # mainmenu should be the last one :)
 source $_B/mainmenu.sh
