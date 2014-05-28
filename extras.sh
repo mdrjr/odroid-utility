@@ -21,3 +21,21 @@ msgbox() {
 	# $1 is the msg
 	whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --msgbox "$1" 0 0 0 
 }
+
+get_board() {
+        B=`cat /proc/cpuinfo  | grep -i odroid | awk {'print $3'}`
+        case "$B" in
+                "ODROIDXU")
+                        export BOARD="odroidxu"
+                        echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+                        ;;
+                "ODROIDX") export BOARD="odroidx" ;;
+                "ODROIDX2") export BOARD="odroidx2" ;;
+                "ODROID-U2/U3") export BOARD="odroidu2" ;;
+                "ODROIDU2") export BOARD="odroidu2" ;;
+                *)
+                        msgbox "GET-BOARD: Couldn't identify your board $B please report on the forums"
+                        ;;
+        esac 
+	return $BOARD
+}
