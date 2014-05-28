@@ -99,5 +99,5 @@ armsoc_rebuild_debian() {
 }
 
 armsoc_err_not_supportted() {
-	whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --msgbox "ARMSOC: Your distro isn't supportted. Report this on the forums -> Distro $DISTRO" 0 0 0
+	msgbox "ARMSOC: Your distro isn't supportted. Report this on the forums -> Distro $DISTRO"
 }
