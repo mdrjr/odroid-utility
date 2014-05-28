@@ -2,6 +2,9 @@
 
 # ODROID Utility v2
 
+# For debug uncomment
+set -x
+
 # Global defines
 _B="/root/odroid-utility"
 
