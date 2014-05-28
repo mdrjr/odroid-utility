@@ -2,7 +2,7 @@
 
 change_hostname() {
 	
-	whiptail --msgbox "The RFC requires that the hostname contains only:
+	msgbox "The RFC requires that the hostname contains only:
 letters 'a' to 'z'
 numbers '0' to '9'
 and hyphen (-)
