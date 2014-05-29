@@ -4,7 +4,7 @@ while true; do
 
 	CC=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Main Menu" 0 0 1 --cancel-button "Exit" --ok-button "Select" \
 		"1" "HDMI Configuration" \
-		"2" "Update your Kernel" \
+		"2" "Update your Kernel/Firmware" \
 		"3" "Install/Update XBMC (Ubuntu Only)" \
 		"4" "Resize your root partition" \
 		"5" "Xorg On/Off" \
