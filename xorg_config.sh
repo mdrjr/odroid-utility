@@ -21,7 +21,7 @@ xorg_config() {
 				disable_xorg_at_boot
 				REBOOT=1
 				;;
-			*) return 0;;
+			*) ;;
 		esac
 	fi
 	
@@ -31,6 +31,8 @@ enable_xorg_at_boot() {
 	
 	if [ "$DISTRO" = "ubuntu" ]; then
 		rm -fr /etc/init/lightdm.override
+	elif [ "$DISTRO" = "debian" ]; then
+		update-rc.d lightdm enable 2 3 4 5
 	else
 	
 		xorg_err_not_supportted
@@ -42,6 +44,8 @@ disable_xorg_at_boot() {
 	
 	if [ "$DISTRO" = "ubuntu" ]; then
 		echo "manual" > /etc/init/lightdm.override
+	elif [ "$DISTRO" = "debian" ]; then
+		update-rc.d lightdm disable 2 3 4 5
 	else
 
 		xorg_err_not_supportted
