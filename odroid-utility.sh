@@ -9,6 +9,12 @@
 _B="/usr/local/bin"
 
 initialization() {
+	
+		if [ `whoami` != "root" ]; then
+			echo "You must run the app as root."
+			echo "sudo $0"
+			exit 0
+		fi
 
         # check what distro we are runnig.
         _R=`lsb_release -i -s`
