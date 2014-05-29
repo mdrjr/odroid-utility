@@ -135,7 +135,17 @@ do_bootscript_update() {
 }
 
 do_udev_update() {
-	echo 
+
+	if [ "$DISTRO" = "ubuntu" ] || [ "$DISTRO" = "debian" ]; then
+		echo "KERNEL==\"mali\",SUBSYSTEM==\"misc\",MODE=\"0777\"" > /etc/udev/rules.d/10-odroid.rules
+		echo "KERNEL==\"ump\",SUBSYSTEM==\"ump\",MODE=\"0777\"" >> /etc/udev/rules.d/10-odroid.rules
+		echo "KERNEL==\"ttySAC0\", SYMLINK+=\"ttyACM99\"" >> /etc/udev/rules.d/10-odroid.rules
+		echo "KERNEL==\"event*\", SUBSYSTEM==\"input\", MODE=\"0777\"" >> /etc/udev/rules.d/10-odroid.rules
+		echo "KERNEL==\"CEC\", MODE=\"0777\"" >> /etc/udev/rules.d/10-odroid.rules
+	fi
+	
+	msgbox "KERNEL-UPDATE: UDEV: udev rules for ODROID Installed"
+
 }
 
 do_bootloader_update() {
