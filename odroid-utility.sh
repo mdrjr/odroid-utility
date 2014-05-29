@@ -23,6 +23,9 @@ initialization() {
                 "Ubuntu")
                         export DISTRO="ubuntu"
                         ;;
+                "Debian")
+						export DISTRO="debian"
+						;;
                 *)
                         echo "I couldn't identify your distribution."
                         echo "Please report this error on the forums"
@@ -51,9 +54,15 @@ install_bootstrap_packages() {
 
         case "$DISTRO" in
                 "ubuntu")
+						apt-get update
                         apt-get -y install axel build-essential git xz-utils whiptail unzip wget curl
                         apt-get -y build-dep xserver-xorg-video-armsoc
                         ;;
+                 "debian")
+						apt-get update
+						apt-get -y build-dep xserver-xorg-video-modesetting xserver-xorg-video-nouveau
+						apt-get -y install build-essential git xz-utils xserver-xorg-dev libudev-dev axel wget curl unzip whiptail
+						;;
 				*)
 				echo "Shouldn't reach here! Please report this on the forums."
 				exit 0
