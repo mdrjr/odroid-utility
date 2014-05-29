@@ -3,7 +3,7 @@
 # ODROID Utility v2
 
 # For debug uncomment
-set -x
+# set -x
 
 # Global defines
 _B="/root/odroid-utility"
@@ -42,7 +42,7 @@ install_bootstrap_packages() {
 
         case "$DISTRO" in
                 "ubuntu")
-                        apt-get -y install axel build-essential git xz-utils whiptail unzip
+                        apt-get -y install axel build-essential git xz-utils whiptail unzip wget curl
                         apt-get -y build-dep xserver-xorg-video-armsoc
                         ;;
 				*)
