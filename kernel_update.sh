@@ -83,7 +83,16 @@ do_kernel_update() {
 }
 
 do_firmware_update() {
-	echo
+	rm -rf $KTMP
+	mkdir -p $KTMP
+	cd $KTMP
+	dlf_fast $FIRMWARE_URL "Downloading Linux Firmware files (/lib/firmware)" $KTMP/firmware.tar.xz
+	echo "Updating the firmware"
+	xz -d firmware.tar.xz
+	(cd /lib/firmware && tar xf $KTMP/firmware.tar)
+	msgbox "KERNEL-UPDATE: Done. Firmware updated"
+	rm -fr $KTMP
+	
 }
 
 do_bootscript_update() {
