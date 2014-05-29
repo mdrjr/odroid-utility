@@ -6,9 +6,6 @@ KTMP="/tmp/kupdate"
 # Boot.Scr's
 BOOT_SCR_UBUNTU="http://builder.mdrjr.net/tools/boot.scr_ubuntu.tar"
 BOOT_SCR_UBUNTU_XU="http://builder.mdrjr.net/tools/boot.scr_ubuntu_xu.tar"
-BOOT_SCR_OpenSUSE="http://builder.mdrjr.net/tools/boot.scr_opensuse.tar"
-BOOT_SCR_FEDORA19="http://builder.mdrjr.net/tools/boot.scr_fedora19.tar"
-BOOT_SCR_FEDORA19_XU="http://builder.mdrjr.net/tools/boot.scr_fedora19_xu.tar"
 BOOT_SCR_FEDORA20="http://builder.mdrjr.net/tools/boot.scr_fedora20.tar"
 BOOT_SCR_FEDORA20_XU="http://builder.mdrjr.net/tools/boot.scr_fedora20_xu.tar"
 
@@ -104,7 +101,7 @@ do_udev_update() {
 }
 
 do_bootloader_update() {
-	echo 
+	msgbox "Not yet implemented" 
 }
 
 do_ubuntu_kernel_update() { 
