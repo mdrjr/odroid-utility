@@ -27,7 +27,7 @@ while true; do
 		"7") change_hostname ;;
 		*) msgbox "Error 001. Please report on the forums" && exit 0 ;;
 		esac || msgbox "I don't know how you got here! >> $CC <<  Report on the forums"
-		exit 0
+		
 		
 	fi
 done
