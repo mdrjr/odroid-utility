@@ -6,7 +6,7 @@
 # set -x
 
 # Global defines
-_B="/root/odroid-utility"
+_B="/usr/local/bin"
 
 initialization() {
 
@@ -29,13 +29,16 @@ initialization() {
 
         # now that we know what we are running, lets grab all the OS Packages that we need.
 
-        # install_bootstrap_packages
+        install_bootstrap_packages
         
-        # update_internals
+        update_internals
 
-		# self_update
-		
-		source $_B/config.sh        
+		if [ -f $_B/config.sh ]; then
+			source $_B/config.sh
+		else
+			echo "Error. Couldn't start"
+			exit 0
+		fi
 }
 
 install_bootstrap_packages() {
@@ -52,6 +55,24 @@ install_bootstrap_packages() {
 		esac
 }
 
+update_internals() {
+	echo "Performing scripts updates"
+	baseurl="https://raw.githubusercontent.com/mdrjr/odroid-utility/master"
+	
+	FILES=`curl -s $baseurl/files.txt`
+	APP_REV=`curl -s https://api.github.com/repos/mdrjr/odroid-utility/git/refs/heads/master | awk '{ if ($1 == "\"sha\":") { print substr($2, 2, 40) } }'`
+	
+	for fu in $FILES; do
+		echo "Updating: $fu"
+		rm -fr $_B/$fu
+		curl -s $baseurl/$fu > $_B/$fu
+	done
+	
+	sed s/"_REV=\"1\""/"_REV=\"$APP_REV\""/g $_B/config.sh > $_B/tmpfile
+	mv $_B/tmpfile $_B/config.sh
+	
+	chmod +x $_B/odroid-utility.sh
+}
 
 # Start the script
 initialization
