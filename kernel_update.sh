@@ -42,7 +42,7 @@ kernel_update() {
 				"3") do_bootscript_update ;;
 				"4") do_udev_update ;;
 				"5") do_bootloader_update ;;
-				"6") return 0;;
+				"6") return;;
 				*) msgbox "KERNEL-UPDATE: Error. You shouldn't be here. Value $KO please report this on the forums" ;;
 			esac
 		fi
@@ -72,8 +72,6 @@ do_kernel_update() {
 			do_debian_kernel_update ;;
 		*) msgbox "KERNEL-UPDATE: Distro not found. Shouldn't be here. Please report on the forums" ;;
 	esac
-
-	return 0
 }
 
 do_firmware_update() {
