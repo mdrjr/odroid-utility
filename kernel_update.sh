@@ -42,15 +42,12 @@ kernel_update() {
 				"3") do_bootscript_update ;;
 				"4") do_udev_update ;;
 				"5") do_bootloader_update ;;
-				"6") return 0 ;;
+				"6") return 0;;
 				*) msgbox "KERNEL-UPDATE: Error. You shouldn't be here. Value $KO please report this on the forums" ;;
 			esac
 		fi
 	
 	done
-
-	return 0
-
 }
 
 do_kernel_download() {
@@ -93,7 +90,48 @@ do_firmware_update() {
 }
 
 do_bootscript_update() {
-	echo
+
+	rm -fr $KTMP
+	mkdir -p $KTMP
+	cd $KTMP
+
+	case "$DISTRO" in
+		"ubuntu")
+			if [ "$BOARD" = "odroidxu" ]; then
+				dlf $BOOT_SCR_UBUNTU_XU "Download boot.ini for ODROID-XU" $KTMP/bscrxu.tar
+				tar xf bscrxu.tar
+				cp $KTMP/xu/* /media/boot
+			elif [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
+				dlf $BOOT_SCR_UBUNTU "Downloading boot.scr's for $BOARD" $KTMP/prime.tar
+				tar xf prime.tar
+				cp $KTMP/x2u2/*.scr /media/boot
+			elif [ "$BOARD" = "odroidx" ]; then
+				dlf $BOOT_SCR_UBUNTU "Downloading boot.scr's for ODROID-X" $KTMP/reg.tar
+				tar xf reg.tar
+				cp $KTMP/x/*.scr /media/boot
+			fi
+			;;
+		"debian")
+			if [ "$BOARD" = "odroidxu" ]; then
+				dlf $BOOT_SCR_UBUNTU_XU "Download boot.ini for ODROID-XU" $KTMP/bscrxu.tar
+				tar xf bscrxu.tar
+				cp $KTMP/xu/* /media/boot
+			elif [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
+				dlf $BOOT_SCR_UBUNTU "Downloading boot.scr's for $BOARD" $KTMP/prime.tar
+				tar xf prime.tar
+				cp $KTMP/x2u2/*.scr /media/boot
+			elif [ "$BOARD" = "odroidx" ]; then
+				dlf $BOOT_SCR_UBUNTU "Downloading boot.scr's for ODROID-X" $KTMP/reg.tar
+				tar xf reg.tar
+				cp $KTMP/x/*.scr /media/boot
+			fi
+			;;
+		*)
+		msgbox "KERNEL-UPDATE: bootscript: Distro not supported"
+		;;
+	esac
+	
+	msgbox "KERNEL-UPDATE: boostscript: Boot scripts updated"
 }
 
 do_udev_update() {
@@ -150,9 +188,6 @@ do_ubuntu_kernel_update() {
 	LOG: $klog"
 	
 	rm -fr $KTMP
-	
-	return 0
-	
 }
 
 do_debian_kernel_update() { 
@@ -198,9 +233,6 @@ do_debian_kernel_update() {
 	LOG: $klog"
 	
 	rm -fr $KTMP
-	
-	return 0
-	
 }
 
 update_hwclock() {
