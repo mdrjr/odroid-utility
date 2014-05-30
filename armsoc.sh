@@ -17,6 +17,9 @@ armsoc_rebuild_ubuntu() {
 	mkdir -p $root
 	cd $root
 	
+	# Install dependencies.
+	apt-get -y build-dep xserver-xorg-video-armsoc
+	
 	# Download the blobs
 	dlf builder.mdrjr.net/tools/mali-r4p0.txz "Downloading Mali Binaries" $root/mali-r4p0.tar.xz
 	

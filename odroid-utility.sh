@@ -56,12 +56,10 @@ install_bootstrap_packages() {
                 "ubuntu")
 						apt-get update
                         apt-get -y install axel build-essential git xz-utils whiptail unzip wget curl
-                        apt-get -y build-dep xserver-xorg-video-armsoc
                         ;;
                  "debian")
 						apt-get update
-						apt-get -y build-dep xserver-xorg-video-modesetting xserver-xorg-video-nouveau
-						apt-get -y install build-essential git xz-utils xserver-xorg-dev libudev-dev axel wget curl unzip whiptail
+						apt-get -y install axel wget curl unzip whiptail
 						;;
 				*)
 				echo "Shouldn't reach here! Please report this on the forums."
