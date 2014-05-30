@@ -15,7 +15,8 @@ No other char/symbol/punctuation or white-spaces are allowed." 0 0 0
 	
 	if [ $? -eq 0 ]; then
 		echo $NH > /etc/hostname
-		echo "127.0.0.1 $NH" >> /etc/hosts
+		cat /etc/hosts | sed s/"$CH"/"$NH"/g > /tmp/hosts
+		mv /tmp/hosts /etc/hosts
 		REBOOT=1
 	fi
 }
