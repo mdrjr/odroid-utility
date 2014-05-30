@@ -1,9 +1,9 @@
 #!/bin/bash
 
 rebuild_armsoc() { 
-	if [ "$DISTRO" = "ubuntu" ]; then
+	if [ "$DISTRO" = "ubuntu" ] || [ "$BOARD" != "odroidxu" ]; then
 		armsoc_rebuild_ubuntu
-	elif [ "$DISTRO" = "debian" ]; then
+	elif [ "$DISTRO" = "debian" ] || [ "$BOARD" != "odroidxu" ]; then
 		armsoc_rebuild_debian
 	else
 		armsoc_err_not_supportted
@@ -99,5 +99,5 @@ armsoc_rebuild_debian() {
 }
 
 armsoc_err_not_supportted() {
-	msgbox "ARMSOC: Your distro isn't supportted. Report this on the forums -> Distro $DISTRO"
+	msgbox "ARMSOC: Your distro isn't supportted. Report this on the forums -> Distro $DISTRO and board $BOARD"
 }
