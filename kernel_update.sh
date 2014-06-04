@@ -113,15 +113,15 @@ do_bootscript_update() {
 			if [ "$BOARD" = "odroidxu" ]; then
 				dlf $BOOT_SCR_UBUNTU_XU "Download boot.ini for ODROID-XU" $KTMP/bscrxu.tar
 				tar xf bscrxu.tar
-				cp $KTMP/xu/* /media/boot
+				cp $KTMP/xu/* /boot
 			elif [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
 				dlf $BOOT_SCR_UBUNTU "Downloading boot.scr's for $BOARD" $KTMP/prime.tar
 				tar xf prime.tar
-				cp $KTMP/x2u2/*.scr /media/boot
+				cp $KTMP/x2u2/*.scr /boot
 			elif [ "$BOARD" = "odroidx" ]; then
 				dlf $BOOT_SCR_UBUNTU "Downloading boot.scr's for ODROID-X" $KTMP/reg.tar
 				tar xf reg.tar
-				cp $KTMP/x/*.scr /media/boot
+				cp $KTMP/x/*.scr /boot
 			fi
 			;;
 		*)
