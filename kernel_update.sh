@@ -156,7 +156,7 @@ do_ubuntu_kernel_update() {
 	echo "*** Installing new kernel. Please way. A backup and log will be saved on /root"
 	export klog=/root/kernel_update-log-$DATE.txt
 	
-	tar -zcf /root/kernel-backup-$DATE.tar.xz /lib/modules /media/boot &>> $klog
+	tar -Jcf /root/kernel-backup-$DATE.tar.xz /lib/modules /media/boot &>> $klog
 	xz -d $BOARD.tar.xz &>> $klog
 	tar xf $BOARD.tar &>> $klog
 	
@@ -192,7 +192,7 @@ do_ubuntu_kernel_update() {
 	
 	msgbox "KERNEL-UPDATE: Done. Your kernel should be updated now.
 	Check /root for the backup and log files.
-	BACKUP: /root/kernel-backup-$DATE.tar.gz
+	BACKUP: /root/kernel-backup-$DATE.tar.xz
 	LOG: $klog"
 	
 	rm -fr $KTMP
@@ -204,7 +204,7 @@ do_debian_kernel_update() {
 	echo "*** Installing new kernel. Please way. A backup and log will be saved on /root"
 	export klog=/root/kernel_update-log-$DATE.txt
 	
-	tar -zcf /root/kernel-backup-$DATE.tar.xz /lib/modules /boot &>> $klog
+	tar -Jcf /root/kernel-backup-$DATE.tar.xz /lib/modules /boot &>> $klog
 	xz -d $BOARD.tar.xz &>> $klog
 	tar xf $BOARD.tar &>> $klog
 	
@@ -237,7 +237,7 @@ do_debian_kernel_update() {
 	
 	msgbox "KERNEL-UPDATE: Done. Your kernel should be updated now.
 	Check /root for the backup and log files.
-	BACKUP: /root/kernel-backup-$DATE.tar.gz
+	BACKUP: /root/kernel-backup-$DATE.tar.xz
 	LOG: $klog"
 	
 	rm -fr $KTMP
