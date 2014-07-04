@@ -19,7 +19,7 @@ odroid-utility.sh
 
 Don't worry about the extra files. The script self-updates itself everytime its started.
 
-**What is supported**
+**What is supported :**
 
 * Debian and Ubuntu ATM. More to come,
 * Xorg on/off,
