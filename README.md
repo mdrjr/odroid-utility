@@ -12,8 +12,11 @@ I plan to replace kernel-update with this tool very soon.
 **How to Install :**
 
 >sudo -s
+
 >wget -O /usr/local/bin/odroid-utility.sh https://raw.githubusercontent.com/mdrjr/odroid-utility/master/odroid-utility.sh
+
 >chmod +x /usr/local/bin/odroid-utility.sh
+
 >odroid-utility.sh
 
 
