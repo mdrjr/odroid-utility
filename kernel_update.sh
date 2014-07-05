@@ -165,8 +165,10 @@ do_ubuntu_kernel_update() {
 	cp -aRP boot/zImage /media/boot/zImage &>> $klog
 	cp -aRP lib/modules/* /lib/modules &>> $klog
 	
-	cat /etc/initramfs-tools/initramfs.conf | sed s/"MODULES=most"/"MODULES=dep"/g > /tmp/a.conf
-    mv /tmp/a.conf /etc/initramfs-tools/initramfs.conf
+	if [ -f /etc/initramfs-tools/initramfs.conf ]; then
+		cat /etc/initramfs-tools/initramfs.conf | sed s/"MODULES=most"/"MODULES=dep"/g > /tmp/a.conf
+		mv /tmp/a.conf /etc/initramfs-tools/initramfs.conf
+	fi
 
     export K_VERSION=`ls $KTMP/boot/config-* | sed s/"-"/" "/g | awk '{printf $2}'`
     cp $KTMP/boot/config-* /boot
@@ -213,8 +215,10 @@ do_debian_kernel_update() {
 	cp -aRP boot/zImage /boot/zImage &>> $klog
 	cp -aRP lib/modules/* /lib/modules &>> $klog
 	
-	cat /etc/initramfs-tools/initramfs.conf | sed s/"MODULES=most"/"MODULES=dep"/g > /tmp/a.conf
-    mv /tmp/a.conf /etc/initramfs-tools/initramfs.conf
+	if [ -f /etc/initramfs-tools/initramfs.conf ]; then
+		cat /etc/initramfs-tools/initramfs.conf | sed s/"MODULES=most"/"MODULES=dep"/g > /tmp/a.conf
+		mv /tmp/a.conf /etc/initramfs-tools/initramfs.conf
+	fi
 
     export K_VERSION=`ls $KTMP/boot/config-* | sed s/"-"/" "/g | awk '{printf $2}'`
     cp $KTMP/boot/config-* /boot
