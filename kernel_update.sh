@@ -153,7 +153,7 @@ do_bootloader_update() {
 do_ubuntu_kernel_update() { 
 	cd $KTMP
 	
-	echo "*** Installing new kernel. Please way. A backup and log will be saved on /root"
+	echo "*** Installing new kernel. Please wait. A backup and log will be saved on /root"
 	export klog=/root/kernel_update-log-$DATE.txt
 	
 	tar -Jcf /root/kernel-backup-$DATE.tar.xz /lib/modules /media/boot &>> $klog
