@@ -40,6 +40,7 @@ get_board() {
                 "ODROIDX2") export BOARD="odroidx2" ;;
                 "ODROID-U2/U3") export BOARD="odroidu2" ;;
                 "ODROIDU2") export BOARD="odroidu2" ;;
+                "ODROID-XU3") export BOARD="odroidxu3" ;;
                 *)
                         msgbox "GET-BOARD: Couldn't identify your board $B please report on the forums"
                         ;;
