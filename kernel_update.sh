@@ -8,6 +8,7 @@ BOOT_SCR_UBUNTU="http://builder.mdrjr.net/tools/boot.scr_ubuntu.tar"
 BOOT_SCR_UBUNTU_XU="http://builder.mdrjr.net/tools/boot.scr_ubuntu_xu.tar"
 BOOT_SCR_FEDORA20="http://builder.mdrjr.net/tools/boot.scr_fedora20.tar"
 BOOT_SCR_FEDORA20_XU="http://builder.mdrjr.net/tools/boot.scr_fedora20_xu.tar"
+BOOT_SCR_UBUNTU_XU3="http://builder.mdrjr.net/tools/odroidxu3.boot.ini"
 
 # Firmware
 FIRMWARE_URL="http://builder.mdrjr.net/tools/firmware.tar.xz"
@@ -15,6 +16,7 @@ FIRMWARE_URL="http://builder.mdrjr.net/tools/firmware.tar.xz"
 # Kernel builds
 export K_PKG_URL="http://builder.mdrjr.net/kernel-3.8/00-LATEST"
 export XU_K_PKG_URL="http://builder.mdrjr.net/kernel-3.4/00-LATEST"
+export XU3_K_PKG_URL="http://builder.mdrjr.net/kernel-3.10/00-LATEST"
 
 
 kernel_update() {
@@ -57,6 +59,8 @@ do_kernel_download() {
 	
 	if [ "$BOARD" = "odroidxu" ]; then
 		dlf_fast $XU_K_PKG_URL/$BOARD.tar.xz "Downloading ODROID-XU Kernel. Please wait." $KTMP/$BOARD.tar.xz
+	elif [ "$BOARD" = "odroidxu3" ]; then
+		dlf_fast $XU3_K_PKG_URL/$BOARD.tar.xz "Downloading ODROID-XU3 Kernel. Please wait." $KTMP/$BOARD.tar.xz
 	else
 		dlf_fast $K_PKG_URL/$BOARD.tar.xz "Downloading $BOARD Kernel. Please Wait." $KTMP/$BOARD.tar.xz
 	fi
@@ -107,6 +111,8 @@ do_bootscript_update() {
 				dlf $BOOT_SCR_UBUNTU "Downloading boot.scr's for ODROID-X" $KTMP/reg.tar
 				tar xf reg.tar
 				cp $KTMP/x/*.scr /media/boot
+			elif [ "$BOARD" = "odroidxu3" ]; then
+				dlf $BOOT_SCR_UBUNTU_XU3 "Updating boot.ini for ODROID-XU3" /media/boot/boot.ini
 			fi
 			;;
 		"debian")
@@ -122,6 +128,8 @@ do_bootscript_update() {
 				dlf $BOOT_SCR_UBUNTU "Downloading boot.scr's for ODROID-X" $KTMP/reg.tar
 				tar xf reg.tar
 				cp $KTMP/x/*.scr /boot
+			elif [ "$BOARD" = "odroidxu3" ]; then
+				dlf $BOOT_SCR_UBUNTU_XU3 "Updating boot.ini for ODROID-XU3" /media/boot/boot.ini
 			fi
 			;;
 		*)
@@ -136,6 +144,7 @@ do_udev_update() {
 
 	if [ "$DISTRO" = "ubuntu" ] || [ "$DISTRO" = "debian" ]; then
 		echo "KERNEL==\"mali\",SUBSYSTEM==\"misc\",MODE=\"0777\"" > /etc/udev/rules.d/10-odroid.rules
+		echo "KERNEL==\"mali0\",SUBSYSTEM==\"misc\",MODE=\"0777\"" >> /etc/udev/rules.d/10-odroid.rules
 		echo "KERNEL==\"ump\",SUBSYSTEM==\"ump\",MODE=\"0777\"" >> /etc/udev/rules.d/10-odroid.rules
 		echo "KERNEL==\"ttySAC0\", SYMLINK+=\"ttyACM99\"" >> /etc/udev/rules.d/10-odroid.rules
 		echo "KERNEL==\"event*\", SUBSYSTEM==\"input\", MODE=\"0777\"" >> /etc/udev/rules.d/10-odroid.rules
@@ -160,9 +169,12 @@ do_ubuntu_kernel_update() {
 	xz -d $BOARD.tar.xz &>> $klog
 	tar xf $BOARD.tar &>> $klog
 	
-	rm -fr /media/boot/zImage* /media/boot/uImage* /media/boot/uInitrd* /lib/modules/3.8.13* /lib/modules/3.4* &>> $klog
+	rm -fr /media/boot/exynos5422-odroidxu3.dtb /media/boot/zImage* /media/boot/uImage* /media/boot/uInitrd* /lib/modules/3.8.13* /lib/modules/3.4* &>> $klog
 	
 	cp -aRP boot/zImage /media/boot/zImage &>> $klog
+	if [ "$BOARD" = "odroidxu3" ]; then
+		cp -aRP boot/exynos5422-odroidxu3.dtb /media/boot/exynos5422-odroidxu3.dtb &>> $klog
+	fi
 	cp -aRP lib/modules/* /lib/modules &>> $klog
 	
 	if [ -f /etc/initramfs-tools/initramfs.conf ]; then
@@ -210,9 +222,12 @@ do_debian_kernel_update() {
 	xz -d $BOARD.tar.xz &>> $klog
 	tar xf $BOARD.tar &>> $klog
 	
-	rm -fr /boot/zImage* /boot/uImage* /boot/uInitrd* /lib/modules/3.8.13* /lib/modules/3.4* &>> $klog
+	rm -fr /boot/exynos5422-odroidxu3.dtb /boot/zImage* /boot/uImage* /boot/uInitrd* /lib/modules/3.8.13* /lib/modules/3.4* &>> $klog
 	
 	cp -aRP boot/zImage /boot/zImage &>> $klog
+	if [ "$BOARD" = "odroidxu3" ]; then
+		cp -aRP boot/exynos5422-odroidxu3.dtb /boot/exynos5422-odroidxu3.dtb &>> $klog
+	fi
 	cp -aRP lib/modules/* /lib/modules &>> $klog
 	
 	if [ -f /etc/initramfs-tools/initramfs.conf ]; then
