@@ -1,6 +1,12 @@
 #!/bin/bash
 
 setup_hdmi() {
+
+	if [ "$BOARD" = "odroidxu" ] || [ "$BOARD" = "odroidxu3" ]; then
+		msgbox "For ODROID-XU and ODROID-XU3 please check the /media/boot/boot.ini file instead. There are instructions there"
+		return 0
+	fi
+
 	HM=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "HDMI Configuration" 0 0 0 \
 	"1" "Automatic Configuration" \
 	"2" "1920x1080 (1080P) Using your monitor timings (EDID)" \
