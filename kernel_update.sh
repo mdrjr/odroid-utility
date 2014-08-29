@@ -71,7 +71,7 @@ do_kernel_download() {
 	CHECK=`md5sum $KTMP.md5sum | awk '{print $2}'`
 	if [ "$CHECK" != "OK" ]; then
 		msgbox "There was a issue downloading the kernel. Application will exit."
-		return
+		exit
 	fi
 }
 
