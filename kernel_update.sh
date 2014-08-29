@@ -244,7 +244,7 @@ do_bootloader_update() {
 	elif [ "$BOARD" = "odroidx" ] || [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
 		# 4412 Update
 		# bl1
-		echo "*** Downloading Bootloaders for ODROID-X/X2/U3/U3"
+		echo "*** Downloading Bootloaders for ODROID-X/X2/U2/U3"
 		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/bl1.HardKernel > $BLTEMP/bl1.bin; then
 			msgbox "Something wrong with the Download. Will now quit"
 			return
