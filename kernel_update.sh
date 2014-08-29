@@ -166,7 +166,117 @@ do_udev_update() {
 }
 
 do_bootloader_update() {
-	msgbox "Not yet implemented" 
+	# This part is heavily based on this: 
+	#  https://github.com/hardkernel/u-boot/blob/odroid-v2010.12/sd_fuse/sd_fusing.sh
+
+	device=/dev/mmcblk0
+	D="SDCard"
+
+	if [ -f /sys/block/mmcblk0boot0/force_ro ]; then
+		emmc=1
+		D="eMMC"
+		device=/dev/mmcblk0boot0
+		if ! echo 0 > /sys/block/mmcblk0boot0/force_ro; then
+			msgbox "I've found a running eMMC but I couldn't get it to accept the new bootloaders."
+			return
+		fi
+	fi
+	
+	if [ -n "$emmc" ] && [ "$BOARD" = "odroidx" ] || [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
+		# 4412 eMMC Positions
+		signed_bl1_position=0
+		bl2_position=30
+		uboot_position=62
+		tzsw_position=2110
+	elif [ "$BOARD" = "odroidx" ] || [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
+		# 4412 SDMMC Positions
+		signed_bl1_position=1
+		bl2_position=31
+		uboot_position=63
+		tzsw_position=2111
+	elif [ -n "$emmc" ] && [ "$BOARD" = "odroidxu3" ]; then
+		# 5422 eMMC Positions
+		signed_bl1_position=0
+		bl2_position=30
+		uboot_position=62
+		tzsw_position=718		
+	elif [ "$BOARD" = "odroidxu3" ]; then
+		# 5422 SDMMC Positions
+		signed_bl1_position=1
+		bl2_position=31
+		uboot_position=63
+		tzsw_position=719
+	else
+		msgbox "Your board: $BOARD isn't supported yet"
+		return
+	fi
+	
+	BLTEMP=/tmp/blTemp
+	rm -fr $BLTEMP
+	mkdir $BLTEMP
+	
+	
+	if ! whiptail --yesno "I found that you booted from a $D. If that's correct say Yes and I'll download and update your bootloaders. Otherwise please say NO" 0 0; then
+		msgbox "Understood! Aborting!"
+		return
+	fi
+	
+	if [ "$BOARD" = "odroidxu3" ]; then
+		# 5422 Update
+		# bl1
+		echo "*** Downloading Bootloaders for ODROID-XU3"
+		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroidxu3-v2012.07/sd_fuse/hardkernel/bl1.bin.hardkernel > $BLTEMP/bl1.bin; then
+			msgbox "Something wrong with the Download. Will now quit"
+			return
+		fi
+		# bl2
+		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroidxu3-v2012.07/sd_fuse/hardkernel/bl2.bin.hardkernel > $BLTEMP/bl2.bin; then
+			msgbox "Something wrong with the Download. Will now quit"
+		fi
+		# u-boot
+		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroidxu3-v2012.07/sd_fuse/hardkernel/u-boot.bin.hardkernel > $BLTEMP/uboot.bin; then
+			msgbox "Something wrong with the Download. Will now quit"
+		fi
+		#tzsw
+		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroidxu3-v2012.07/sd_fuse/hardkernel/tzsw.bin.hardkernel > $BLTEMP/tzsw.bin; then
+			msgbox "Something wrong with the Download. Will now quit"
+		fi
+	elif [ "$BOARD" = "odroidx" ] || [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
+		# 4412 Update
+		# bl1
+		echo "*** Downloading Bootloaders for ODROID-X/X2/U3/U3"
+		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/bl1.HardKernel > $BLTEMP/bl1.bin; then
+			msgbox "Something wrong with the Download. Will now quit"
+			return
+		fi
+		# bl2
+		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/bl2.HardKernel > $BLTEMP/bl2.bin; then
+			msgbox "Something wrong with the Download. Will now quit"
+		fi
+		# u-boot
+		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/u-boot.bin.HardKernel > $BLTEMP/uboot.bin; then
+			msgbox "Something wrong with the Download. Will now quit"
+		fi
+		#tzsw
+		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/tzsw.HardKernel > $BLTEMP/tzsw.bin; then
+			msgbox "Something wrong with the Download. Will now quit"
+		fi
+	else
+		msgbox "Your board: $BOARD isn't supported yet"
+		return
+	fi
+
+	echo "*** Updating bl1"
+	dd iflag=dsync oflag=dsync if=$BLTEMP/bl1.bin of=$device seek=$signed_bl1_position
+	echo "*** Updating bl2"
+	dd iflag=dsync oflag=dsync if=$BLTEMP/bl2.bin of=$device seek=$bl2_position
+	echo "*** Updating U-Boot" 
+	dd iflag=dsync oflag=dsync if=$BLTEMP/uboot.bin of=$device seek=$uboot_position
+	echo "*** Update tzsw" 
+	dd iflag=dsync oflag=dsync if=$BLTEMP/tzsw.bin of=$device seek=$tzsw_position
+	
+	msgbox "Bootloader Update complete"
+	
 }
 
 do_ubuntu_kernel_update() { 
