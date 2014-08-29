@@ -313,8 +313,10 @@ do_ubuntu_kernel_update() {
 		(cd /usr && tar xf $KTMP/hwc.tar) &>> $klog
 	fi
 
-	echo "exit 0" > /etc/initramfs/post-update.d/flash-kernel
-	chmod +x /etc/initramfs/post-update.d/flash-kernel
+	if [ -f /etc/initramfs/post-update.d/flash-kernel ]; then
+		echo "exit 0" > /etc/initramfs/post-update.d/flash-kernel
+		chmod +x /etc/initramfs/post-update.d/flash-kernel
+	fi
 	
 	if [ "$BOARD" != "odroidxu" ]; then
 		update_hwclock
