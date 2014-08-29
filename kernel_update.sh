@@ -44,7 +44,7 @@ kernel_update() {
 				"3") do_bootscript_update ;;
 				"4") do_udev_update ;;
 				"5") do_bootloader_update ;;
-				"6") return;;
+				"6") break;;
 				*) msgbox "KERNEL-UPDATE: Error. You shouldn't be here. Value $KO please report this on the forums" ;;
 			esac
 		fi
