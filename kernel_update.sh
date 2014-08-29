@@ -68,8 +68,9 @@ do_kernel_download() {
 		dlf_fast $K_PKG_URL/$BOARD.tar.xz.md5sum "Downloading $BOARD Kernel MD5SUM. Please Wait." $KTMP/$BOARD.tar.xz.md5sum
 	fi
 	
-	CHECK=`md5sum $KTMP.md5sum | awk '{print $2}'`
-	if [ "$CHECK" != "OK" ]; then
+	VALID=`cat $KTMP/$BOARD.tar.xz.md5sum | awk '{printf $1}'`
+	CURRENT=`md5sum $KTMP/$BOARD.tar.xz | awk '{printf $1}'`
+	if [ "$VALID" != "$CURRENT" ]; then
 		msgbox "There was a issue downloading the kernel. Application will exit."
 		exit
 	fi
