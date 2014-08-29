@@ -59,10 +59,19 @@ do_kernel_download() {
 	
 	if [ "$BOARD" = "odroidxu" ]; then
 		dlf_fast $XU_K_PKG_URL/$BOARD.tar.xz "Downloading ODROID-XU Kernel. Please wait." $KTMP/$BOARD.tar.xz
+		dlf_fast $XU_K_PKG_URL/$BOARD.tar.xz.md5sum "Downloading ODROID-XU Kernel MD5SUM. Please wait." $KTMP/$BOARD.tar.xz.md5sum
 	elif [ "$BOARD" = "odroidxu3" ]; then
 		dlf_fast $XU3_K_PKG_URL/$BOARD.tar.xz "Downloading ODROID-XU3 Kernel. Please wait." $KTMP/$BOARD.tar.xz
+		dlf_fast $XU3_K_PKG_URL/$BOARD.tar.xz.md5sum "Downloading ODROID-XU3 Kernel MD5SUM. Please wait." $KTMP/$BOARD.tar.xz.md5sum
 	else
 		dlf_fast $K_PKG_URL/$BOARD.tar.xz "Downloading $BOARD Kernel. Please Wait." $KTMP/$BOARD.tar.xz
+		dlf_fast $K_PKG_URL/$BOARD.tar.xz.md5sum "Downloading $BOARD Kernel MD5SUM. Please Wait." $KTMP/$BOARD.tar.xz.md5sum
+	fi
+	
+	CHECK=`md5sum $KTMP.md5sum | awk '{print $2}'`
+	if [ "$CHECK" != "OK" ]; then
+		msgbox "There was a issue downloading the kernel. Application will exit."
+		return
 	fi
 }
 
