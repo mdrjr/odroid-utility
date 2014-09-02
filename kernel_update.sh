@@ -227,19 +227,22 @@ do_bootloader_update() {
 		echo "*** Downloading Bootloaders for ODROID-XU3"
 		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroidxu3-v2012.07/sd_fuse/hardkernel/bl1.bin.hardkernel > $BLTEMP/bl1.bin; then
 			msgbox "Something wrong with the Download. Will now quit"
-			return
+			break
 		fi
 		# bl2
 		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroidxu3-v2012.07/sd_fuse/hardkernel/bl2.bin.hardkernel > $BLTEMP/bl2.bin; then
 			msgbox "Something wrong with the Download. Will now quit"
+			break
 		fi
 		# u-boot
 		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroidxu3-v2012.07/sd_fuse/hardkernel/u-boot.bin.hardkernel > $BLTEMP/uboot.bin; then
 			msgbox "Something wrong with the Download. Will now quit"
+			break
 		fi
 		#tzsw
 		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroidxu3-v2012.07/sd_fuse/hardkernel/tzsw.bin.hardkernel > $BLTEMP/tzsw.bin; then
 			msgbox "Something wrong with the Download. Will now quit"
+			break
 		fi
 	elif [ "$BOARD" = "odroidx" ] || [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
 		# 4412 Update
@@ -247,19 +250,22 @@ do_bootloader_update() {
 		echo "*** Downloading Bootloaders for ODROID-X/X2/U2/U3"
 		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/bl1.HardKernel > $BLTEMP/bl1.bin; then
 			msgbox "Something wrong with the Download. Will now quit"
-			return
+			break
 		fi
 		# bl2
 		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/bl2.HardKernel > $BLTEMP/bl2.bin; then
 			msgbox "Something wrong with the Download. Will now quit"
+			break
 		fi
 		# u-boot
 		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/u-boot.bin.HardKernel > $BLTEMP/uboot.bin; then
 			msgbox "Something wrong with the Download. Will now quit"
+			break
 		fi
 		#tzsw
 		if ! curl -s https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/tzsw.HardKernel > $BLTEMP/tzsw.bin; then
 			msgbox "Something wrong with the Download. Will now quit"
+			break
 		fi
 	else
 		msgbox "Your board: $BOARD isn't supported yet"
