@@ -182,34 +182,39 @@ do_bootloader_update() {
 		fi
 	fi
 	
-	if [ -n "$emmc" ] && [ "$BOARD" = "odroidx" ] || [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
-		# 4412 eMMC Positions
-		signed_bl1_position=0
-		bl2_position=30
-		uboot_position=62
-		tzsw_position=2110
-	elif [ "$BOARD" = "odroidx" ] || [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
-		# 4412 SDMMC Positions
-		signed_bl1_position=1
-		bl2_position=31
-		uboot_position=63
-		tzsw_position=2111
-	elif [ -n "$emmc" ] && [ "$BOARD" = "odroidxu3" ]; then
-		# 5422 eMMC Positions
-		signed_bl1_position=0
-		bl2_position=30
-		uboot_position=62
-		tzsw_position=718		
-	elif [ "$BOARD" = "odroidxu3" ]; then
-		# 5422 SDMMC Positions
-		signed_bl1_position=1
-		bl2_position=31
-		uboot_position=63
-		tzsw_position=719
+	if [ -n "$emmc" ]; then
+		# Going eMMC Mode
+		if [ "$BOARD" = "odroidx" ] || [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
+			# 4412 eMMC Positions
+			signed_bl1_position=0
+			bl2_position=30
+			uboot_position=62
+			tzsw_position=2110
+		elif [ "$BOARD" = "odroidxu3" ]; then
+			# 5422 eMMC Positions
+			signed_bl1_position=0
+			bl2_position=30
+			uboot_position=62
+			tzsw_position=718
+		fi
 	else
-		msgbox "Your board: $BOARD isn't supported yet"
-		return
+		if [ "$BOARD" = "odroidx" ] || [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
+			# 4412 SD Positions
+			signed_bl1_position=1
+			bl2_position=31
+			uboot_position=63
+			tzsw_position=2111
+		elif [ "$BOARD" = "odroidxu3" ]; then
+			# 5422 SD Positions
+			signed_bl1_position=1
+			bl2_position=31
+			uboot_position=63
+			tzsw_position=719
+		else
+			msgbox "Your board isn't supported"
+		fi
 	fi
+
 	
 	BLTEMP=/tmp/blTemp
 	rm -fr $BLTEMP
