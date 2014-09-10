@@ -1,9 +1,13 @@
 #!/bin/bash
 
 rebuild_armsoc() { 
-	if [ "$DISTRO" = "ubuntu" ] || [ "$BOARD" != "odroidxu" ]; then
+	if [ "$BOARD" = "odroidxu" ]; then
+		armsoc_err_not_supported
+	fi
+	
+	if [ "$DISTRO" = "ubuntu" ]; then
 		armsoc_rebuild_ubuntu
-	elif [ "$DISTRO" = "debian" ] || [ "$BOARD" != "odroidxu" ]; then
+	elif [ "$DISTRO" = "debian" ]; then
 		armsoc_rebuild_debian
 	else
 		armsoc_err_not_supportted
