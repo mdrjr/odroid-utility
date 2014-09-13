@@ -325,7 +325,8 @@ do_ubuntu_kernel_update() {
 	fi
 
 	if [ -f /etc/initramfs/post-update.d/flash-kernel ]; then
-		echo "exit 0" > /etc/initramfs/post-update.d/flash-kernel
+		echo '#!/bin/bash' > /etc/initramfs/post-update.d/flash-kernel
+		echo "exit 0" >> /etc/initramfs/post-update.d/flash-kernel
 		chmod +x /etc/initramfs/post-update.d/flash-kernel
 	fi
 	
