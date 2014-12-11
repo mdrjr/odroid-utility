@@ -80,9 +80,8 @@ update_internals() {
 		rm -fr $_B/$fu
 		curl -s $baseurl/$fu > $_B/$fu
 	done
-	
-	sed s/"_REV=\"1\""/"_REV=\"$APP_REV\""/g $_B/config.sh > $_B/tmpfile
-	mv $_B/tmpfile $_B/config.sh
+
+	echo "_REV=\"1.4 GitRev: \"$APP_REV" >> $_B/config.sh
 	
 	chmod +x $_B/odroid-utility.sh
 }
