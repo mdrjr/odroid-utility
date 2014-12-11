@@ -4,7 +4,7 @@ setup_hdmi() {
 
 	get_board
 
-	if [ "$BOARD" = "odroidxu" ] || [ "$BOARD" = "odroidxu3" ]; then
+	if [ "$BOARD" = "odroidxu" ] || [ "$BOARD" = "odroidxu3" ] || [ [ "$BOARD" = "odroidc" ]; then
 		msgbox "For ODROID-XU and ODROID-XU3 please check the /media/boot/boot.ini file instead. There are instructions there"
 		return 0
 	fi

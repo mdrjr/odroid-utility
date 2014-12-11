@@ -17,6 +17,7 @@ FIRMWARE_URL="http://builder.mdrjr.net/tools/firmware.tar.xz"
 export K_PKG_URL="http://builder.mdrjr.net/kernel-3.8/00-LATEST"
 export XU_K_PKG_URL="http://builder.mdrjr.net/kernel-3.4/00-LATEST"
 export XU3_K_PKG_URL="http://builder.mdrjr.net/kernel-3.10/00-LATEST"
+export C_K_PKG_URL="http://builder.mdrjr.net/kernel-3.10-c/00-LATEST"
 
 
 kernel_update() {
@@ -63,6 +64,9 @@ do_kernel_download() {
 	elif [ "$BOARD" = "odroidxu3" ]; then
 		dlf_fast $XU3_K_PKG_URL/$BOARD.tar.xz "Downloading ODROID-XU3 Kernel. Please wait." $KTMP/$BOARD.tar.xz
 		dlf_fast $XU3_K_PKG_URL/$BOARD.tar.xz.md5sum "Downloading ODROID-XU3 Kernel MD5SUM. Please wait." $KTMP/$BOARD.tar.xz.md5sum
+	elif [ "$BOARD" = "odroidc" ]; then
+		dlf_fast $C_K_PKG_URL/odroidc.tar.xz "Downloading ODROID-C1 kernel. Please wait." $KTMP/odroidc.tar.xz
+		dlf_fast $C_K_PKG_URL/odroidc.tar.xz.md5sum "Downloading ODROID-C1 Kernel MD5SUM. Please Wait." $KTMP/odroidc.tar.xz.md5sum
 	else
 		dlf_fast $K_PKG_URL/$BOARD.tar.xz "Downloading $BOARD Kernel. Please Wait." $KTMP/$BOARD.tar.xz
 		dlf_fast $K_PKG_URL/$BOARD.tar.xz.md5sum "Downloading $BOARD Kernel MD5SUM. Please Wait." $KTMP/$BOARD.tar.xz.md5sum
@@ -166,8 +170,10 @@ do_udev_update() {
 }
 
 do_bootloader_update() {
-	# This part is heavily based on this: 
-	#  https://github.com/hardkernel/u-boot/blob/odroid-v2010.12/sd_fuse/sd_fusing.sh
+	if [ "$BOARD" = "odroidc" ]; then
+		msgbox "Bootloader update isn't implemented for ODROID-C1 yet"
+		return
+	fi
 
 	device=/dev/mmcblk0
 	D="SDCard"
@@ -300,9 +306,15 @@ do_ubuntu_kernel_update() {
 	xz -d $BOARD.tar.xz &>> $klog
 	tar xf $BOARD.tar &>> $klog
 	
-	rm -fr /media/boot/exynos5422-odroidxu3.dtb /media/boot/zImage* /media/boot/uImage* /media/boot/uInitrd* /lib/modules/3.8.13* /lib/modules/3.4* &>> $klog
+	rm -fr /media/boot/exynos5422-odroidxu3.dtb /media/boot/meson8b_odroidc.dtb /media/boot/zImage* /media/boot/uImage* /media/boot/uInitrd* /lib/modules/3.10* /lib/modules/3.8.13* /lib/modules/3.4* &>> $klog
 	
-	cp -aRP boot/zImage /media/boot/zImage &>> $klog
+	if [ "$BOARD" = "odroidc" ]; then
+		cp -aRP boot/uImage /media/boot/uImage &>> $klog
+		cp -aRP boot/meson8b_odroidc.dtb /media/boot/meson8b_odroidc.dtb &>> $klog
+	else
+		cp -aRP boot/zImage /media/boot/zImage &>> $klog
+	fi
+	
 	if [ "$BOARD" = "odroidxu3" ]; then
 		cp -aRP boot/exynos5422-odroidxu3.dtb /media/boot/exynos5422-odroidxu3.dtb &>> $klog
 	fi

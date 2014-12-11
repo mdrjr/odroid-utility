@@ -38,9 +38,9 @@ initialization() {
 
         # now that we know what we are running, lets grab all the OS Packages that we need.
 
-        install_bootstrap_packages
-        
-        update_internals
+	install_bootstrap_packages
+      
+	update_internals
 
 		if [ -f $_B/config.sh ]; then
 			source $_B/config.sh

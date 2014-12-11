@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Program Version
-_REV="1"
+_REV="1.4 GitRev: "
 
 # Some variables.
 REBOOT=0

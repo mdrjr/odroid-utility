@@ -3,6 +3,12 @@
 rebuild_armsoc() { 
 	if [ "$BOARD" = "odroidxu" ]; then
 		armsoc_err_not_supported
+		return
+	fi
+	
+	if [ "$BOARD" = "odroidc" ]; then
+		armsoc_err_not_supportted
+		return
 	fi
 	
 	if [ "$DISTRO" = "ubuntu" ]; then
