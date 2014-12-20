@@ -8,7 +8,7 @@ while true; do
 		"3" "Install/Update XBMC (Ubuntu Only)" \
 		"4" "Resize your root partition" \
 		"5" "Xorg On/Off" \
-		"6" "Rebuild Xorg armsoc DDX (fixes ABI errors) "\
+		"6" "Rebuild Xorg DDX (fixes ABI errors) "\
 		"7" "Change Hostname" \
 		3>&1 1>&2 2>&3)
 	
