@@ -24,10 +24,10 @@ Don't worry about the extra files. The script self-updates itself everytime its 
 * Debian and Ubuntu ATM. More to come,
 * Xorg on/off,
 * Change hostname,
-* Configure HDMI (x/x2/u2/u3) only,
+* Configure HDMI (x/x2/u2/u3/c1) only,
 * Kernel Update (all boards),
 * boot.scr's update (all boards) Oh yes. Updating the kernel doesn't replace your boot.scr's anymore. If you was using custom ones to boot from hdd then they should be safe now,
-* Rebuilds ARMSOC DDX , installs new Mali drivers when they are available and fixes ABI errors,
+* Rebuilds Xorg DDX , installs new Mali drivers when they are available and fixes ABI errors,
 * Filesystem resize.
 
 **TODO :**
