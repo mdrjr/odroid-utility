@@ -1,6 +1,8 @@
 #!/bin/bash
 
 rebuild_armsoc() { 
+	get_board 
+	
 	if [ "$BOARD" = "odroidxu" ]; then
 		armsoc_err_not_supported
 		return
