@@ -38,6 +38,7 @@ resize_p2() {
 	sleep 4
 	
 	p2_start=`fdisk -l /dev/mmcblk0 | grep mmcblk0p2 | awk '{print $2}'`
+	p2_finish=$((`fdisk -l /dev/mmcblk0 | grep total | grep sectors | awk '{printf $8}'` - 1024))
 	
 	fdisk /dev/mmcblk0 <<EOF &>> $rsflog
 p
@@ -47,7 +48,7 @@ n
 p
 2
 $p2_start
-
+$p2_finish
 p
 w
 EOF
