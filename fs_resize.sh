@@ -2,7 +2,7 @@
 
 fs_resize() { 
 	
-	AC=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --yesno "Before running this, you must be sure that /dev/mmcblk0 is your root partition.
+	AC=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --yesno "Before running this, you must be sure that /dev/mmcblk0p2 is your root partition.
 		To do this make sure you are booting the eMMC or the microSD ALONE!.
 		
 		DO YOU WANT TO CONTINUE?" 0 0 3>&1 1>&2 2>&3)
