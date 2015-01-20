@@ -54,11 +54,9 @@ install_bootstrap_packages() {
 
         case "$DISTRO" in
                 "ubuntu")
-						apt-get update
                         apt-get -y install axel build-essential git xz-utils whiptail unzip wget curl
                         ;;
                  "debian")
-						apt-get update
 						apt-get -y install axel wget curl unzip whiptail
 						;;
 				*)

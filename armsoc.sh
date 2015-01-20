@@ -9,7 +9,7 @@ rebuild_armsoc() {
 	fi
 	
 	if [ "$BOARD" = "odroidc" ]; then
-		armsoc_err_not_supportted
+		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
 		return
 	fi
 	
@@ -23,6 +23,7 @@ rebuild_armsoc() {
 }
 
 armsoc_rebuild_ubuntu() { 
+	
 	root=/tmp/armsoc-update
 	buildlog=/root/armsoc-update-$DATE.txt
 	

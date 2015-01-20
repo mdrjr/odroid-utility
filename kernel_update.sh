@@ -28,7 +28,7 @@ kernel_update() {
 		KO=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Kernel Update/Configuration" 0 0 0 \
 		"1" "Update Kernel" \
 		"2" "Install firmware files to /lib/firmware" \
-		"3" "Update boot.scr's" \
+		"3" "Update boot scripts" \
 		"4" "Update udev rules for ODROID subdevices (mali, cec..)" \
 		"5" "Update the bootloader" \
 		"6" "Exit" \
@@ -81,6 +81,21 @@ do_kernel_download() {
 }
 
 do_kernel_update() {
+	
+	if [ "$BOARD" = "odroidc" ]; then
+		if [ ! -f /etc/apt/sources.list.d/odroid.list ]; then
+				if ! whiptail --yesno "It looks like you are running image 1.0 or 1.1 for -C1. I can upgrade this to 1.2 for you. I need 500MB of disk space to do that. Are you ok with it ?" 0 0; then
+					return
+				else
+					curl -s deb.odroid.in/v1.1_to_v1.2.sh | bash
+					return
+				fi
+		else
+			msgbox "You are using a new and updated image. For now on. You don't need to update the kernel here anymore. 'apt-get update && apt-get dist-upgrade' are enough!"
+			return
+		fi
+	fi
+					
 	do_kernel_download
 	
 	case "$DISTRO" in 
@@ -93,6 +108,11 @@ do_kernel_update() {
 }
 
 do_firmware_update() {
+	if [ "$BOARD" = "odroidc" ]; then
+		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
+		return
+	fi
+
 	rm -rf $KTMP
 	mkdir -p $KTMP
 	cd $KTMP
@@ -110,6 +130,11 @@ do_bootscript_update() {
 	rm -fr $KTMP
 	mkdir -p $KTMP
 	cd $KTMP
+
+	if [ "$BOARD" = "odroidc" ]; then
+		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
+		return
+	fi
 
 	case "$DISTRO" in
 		"ubuntu")
@@ -171,7 +196,7 @@ do_udev_update() {
 
 do_bootloader_update() {
 	if [ "$BOARD" = "odroidc" ]; then
-		msgbox "Bootloader update isn't implemented for ODROID-C1 yet"
+		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
 		return
 	fi
 
@@ -415,6 +440,11 @@ update_hwclock() {
 }
 
 install_headers() { 
+	if [ "$BOARD" = "odroidc" ]; then
+		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
+		return
+	fi
+
         rm -rf /usr/src/linux-* 
         mv $KTMP/usr/src/linux* /usr/src
         rm -fr /lib/modules/$K_VERSION/build
