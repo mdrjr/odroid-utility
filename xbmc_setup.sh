@@ -34,7 +34,7 @@ xbmc_setup() {
 	kodi_file=kodi_"$bd"-"$rev"_armhf.deb
 	
 	cec_version="2.2.0"
-	cev_rev="1"
+	cec_rev="1"
 	cec_file=libcec_"$cec_version"-"$cec_rev"_armhf.deb
 
 	td=/tmp/kodi_update
