@@ -24,6 +24,11 @@ rebuild_armsoc() {
 
 armsoc_rebuild_ubuntu() { 
 	
+	if [ "$BOARD" = "odroidxu3" ]; then
+		msgbox "ODROID-XU3 isn't supported yet"
+		return
+	fi
+	
 	root=/tmp/armsoc-update
 	buildlog=/root/armsoc-update-$DATE.txt
 	
@@ -34,7 +39,7 @@ armsoc_rebuild_ubuntu() {
 	apt-get -y build-dep xserver-xorg-video-armsoc
 	
 	# Download the blobs
-	dlf builder.mdrjr.net/tools/mali-r4p0.txz "Downloading Mali Binaries" $root/mali-r4p0.tar.xz
+	dlf builder.mdrjr.net/tools/u3/4412_r5p0_x11.tar.xz "Downloading Mali Binaries" $root/mali.tar.xz
 	
 	# Download armsoc DDX from github
 	dlf https://github.com/mdrjr/xf86-video-armsoc/archive/r4p0.zip "Downloading ARMSOC DDX Sources from Github" $root/ddx.zip
@@ -43,8 +48,8 @@ armsoc_rebuild_ubuntu() {
 	echo "Saving build logs to $buildlog"
 	
 	# Unpack
-	xz -d mali-r4p0.tar.xz &>> $buildlog
-	tar xf mali-r4p0.tar &>> $buildlog
+	xz -d mali.tar.xz &>> $buildlog
+	tar xf mali.tar &>> $buildlog
 	unzip -qq ddx.zip &>> $buildlog
 	
 	# Build DDX
@@ -68,6 +73,12 @@ armsoc_rebuild_ubuntu() {
 }	
 
 armsoc_rebuild_debian() { 
+	
+	if [ "$BOARD" = "odroidxu3" ]; then
+		msgbox "ODROID-XU3 isn't supported yet"
+		return
+	fi
+	
 	root=/tmp/armsoc-update
 	buildlog=/root/armsoc-update-$DATE.txt
 	
@@ -81,7 +92,7 @@ armsoc_rebuild_debian() {
 	apt-get -y install build-essential git xz-utils xserver-xorg-dev libudev-dev &>> $buildlog
 	
 	# Download the blobs
-	dlf builder.mdrjr.net/tools/mali-r4p0.txz "Downloading Mali Binaries" $root/mali-r4p0.tar.xz
+	dlf builder.mdrjr.net/tools/u3/4412_r5p0_x11.tar.xz "Downloading Mali Binaries" $root/mali.tar.xz
 	
 	# Download armsoc DDX from github
 	dlf https://github.com/mdrjr/xf86-video-armsoc/archive/r4p0.zip "Downloading ARMSOC DDX Sources from Github" $root/ddx.zip
@@ -90,8 +101,8 @@ armsoc_rebuild_debian() {
 	echo "Saving build logs to $buildlog"
 	
 	# Unpack
-	xz -d mali-r4p0.tar.xz &>> $buildlog
-	tar xf mali-r4p0.tar &>> $buildlog
+	xz -d mali.tar.xz &>> $buildlog
+	tar xf mali.tar &>> $buildlog
 	unzip -qq ddx.zip &>> $buildlog
 	
 	# Build DDX
