@@ -63,10 +63,10 @@ armsoc_rebuild_ubuntu() {
 	# Install new Binaries
 	cd mali
 	cp -aRP lib* /usr/lib
+	cp -aRP lib* /usr/lib/arm-linux-gnueabihf/mali-egl
 	ldconfig
 	cp config/xorg.conf /etc/X11/xorg.conf
 	
-	cd /tmp && rm -fr $root
 	sync
 	
 	msgbox "Mali is now updated. If something fails or isn't working report on the forums with the following file: $buildlog"
