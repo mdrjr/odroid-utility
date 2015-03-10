@@ -10,7 +10,10 @@ while true; do
 	menu_items[10]="6"; menu_items[11]="Rebuild Xorg DDX (fixes ABI errors)"
 	menu_items[12]="7"; menu_items[13]="Change Hostname"
 	if [ "$BOARD" = "odroidc" ]; then
+		# LIRC Menu
 		menu_items[14]="8"; menu_items[15]="Install LIRC"
+		# HDMI Passthru Configuration
+		menu_items[16]="9"; menu_items[17]="HDMI Passthrough (On/Off)"
 	fi
 	
 	
@@ -32,6 +35,7 @@ while true; do
 		"6") rebuild_armsoc  ;;
 		"7") change_hostname ;;
 		"8") lirc_setup ;;
+		"9") odroidc1_hdmipass ;;
 		*) msgbox "Error 001. Please report on the forums" && exit 0 ;;
 		esac || msgbox "I don't know how you got here! >> $CC <<  Report on the forums"
 		
