@@ -10,3 +10,4 @@ mainmenu.sh
 odroid-utility.sh
 xbmc_setup.sh
 xorg_config.sh
+lirc_setup.sh

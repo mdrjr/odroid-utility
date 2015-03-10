@@ -10,6 +10,7 @@ while true; do
 		"5" "Xorg On/Off" \
 		"6" "Rebuild Xorg DDX (fixes ABI errors) "\
 		"7" "Change Hostname" \
+                "8" "Install LIRC" \
 		3>&1 1>&2 2>&3)
 	
 	RET=$?
@@ -25,6 +26,7 @@ while true; do
 		"5") xorg_config ;;
 		"6") rebuild_armsoc  ;;
 		"7") change_hostname ;;
+		"8") lirc_setup ;;
 		*) msgbox "Error 001. Please report on the forums" && exit 0 ;;
 		esac || msgbox "I don't know how you got here! >> $CC <<  Report on the forums"
 		

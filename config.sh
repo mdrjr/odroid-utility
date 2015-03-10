@@ -13,6 +13,7 @@ source $_B/xbmc_setup.sh
 source $_B/xorg_config.sh
 source $_B/armsoc.sh
 source $_B/change_hostname.sh
+source $_B/lirc_setup.sh
 
 # mainmenu should be the last one :)
 source $_B/mainmenu.sh
