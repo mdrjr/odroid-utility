@@ -37,6 +37,15 @@ __EOF
 }
 
 lirc_setup() {
+	
+	# We can only install LIRC if kernel is > build#74
+	KBUILD=`uname -r | cud -d "-" -f2`
+	if [ $KBUILD -le 74 ]; then
+		msgbox "You can only switch to LIRC if your kernel is updated."
+		return
+	fi
+	
+
     apt-get -y purge odroid-remote
     apt-get -y install lirc
 
