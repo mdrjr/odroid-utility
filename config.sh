@@ -15,5 +15,8 @@ source $_B/armsoc.sh
 source $_B/change_hostname.sh
 source $_B/lirc_setup.sh
 
+# Get the board here
+get_board
+
 # mainmenu should be the last one :)
 source $_B/mainmenu.sh

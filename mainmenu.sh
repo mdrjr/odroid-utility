@@ -9,7 +9,9 @@ while true; do
 	menu_items[8]="5"; menu_items[9]="Xorg On/Off"
 	menu_items[10]="6"; menu_items[11]="Rebuild Xorg DDX (fixes ABI errors)"
 	menu_items[12]="7"; menu_items[13]="Change Hostname"
-	menu_items[14]="8"; menu_items[15]="Install LIRC"
+	if [ "$BOARD" = "odroidc" ]; then
+		menu_items[14]="8"; menu_items[15]="Install LIRC"
+	fi
 	
 	
 	CC=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Main Menu" 0 0 1 --cancel-button "Exit" --ok-button "Select" \
