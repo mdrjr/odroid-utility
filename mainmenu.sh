@@ -2,15 +2,18 @@
 
 while true; do
 
+	menu_items[0]="1"; menu_items[1]="HDMI Configuration"
+	menu_items[2]="2"; menu_items[3]="Update your Kernel/Firmware"
+	menu_items[4]="3"; menu_items[5]="Install/Update XBMC (Ubuntu Only)"
+	menu_items[6]="4"; menu_items[7]="Resize your root partition"
+	menu_items[8]="5"; menu_items[9]="Xorg On/Off"
+	menu_items[10]="6"; menu_items[11]="Rebuild Xorg DDX (fixes ABI errors)"
+	menu_items[12]="7"; menu_items[13]="Change Hostname"
+	menu_items[14]="8"; menu_items[15]="Install LIRC"
+	
+	
 	CC=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Main Menu" 0 0 1 --cancel-button "Exit" --ok-button "Select" \
-		"1" "HDMI Configuration" \
-		"2" "Update your Kernel/Firmware" \
-		"3" "Install/Update XBMC (Ubuntu Only)" \
-		"4" "Resize your root partition" \
-		"5" "Xorg On/Off" \
-		"6" "Rebuild Xorg DDX (fixes ABI errors) "\
-		"7" "Change Hostname" \
-                "8" "Install LIRC" \
+		"${menu_items[@]}" \
 		3>&1 1>&2 2>&3)
 	
 	RET=$?
