@@ -47,6 +47,8 @@ lirc_setup() {
 	
 
     apt-get -y purge odroid-remote
+    apt-get -y purge lirc
+    rm -fr /etc/lirc
     apt-get -y install lirc
 
     service lirc stop
@@ -54,7 +56,7 @@ lirc_setup() {
     hwconf=/etc/lirc/hardware.conf
     sed -i "s/^REMOTE_MODULES=.*/REMOTE_MODULES=\"meson-ir\"/g" $hwconf
     sed -i "s/^REMOTE_DRIVER=.*/REMOTE_DRIVER=\"default\"/g" $hwconf
-    sed -i "s/^REMOTE_DEVICE=.*/REMOTE_DEVICE=\"/dev/lirc0\"/g" $hwconf
+    sed -i s/^REMOTE_DEVICE=.*/REMOTE_DEVICE=\""\/dev\/lirc0"\"/g $hwconf
     sed -i "s/^START_LIRCD=.*/START_LIRCD=\"true\"/g" $hwconf
     sed -i "s/^REMOTE_LIRCD_ARGS=.*/REMOTE_LIRCD_ARGS=\"--uinput\"/g" $hwconf
 
