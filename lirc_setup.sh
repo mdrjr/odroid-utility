@@ -55,7 +55,7 @@ lirc_setup() {
     sed -i "s/^REMOTE_MODULES=.*/REMOTE_MODULES=\"meson-ir\"/g" $hwconf
     sed -i "s/^REMOTE_DRIVER=.*/REMOTE_DRIVER=\"default\"/g" $hwconf
     sed -i "s/^REMOTE_DEVICE=.*/REMOTE_DEVICE=\"/dev/lirc0\"/g" $hwconf
-    sed -i "s/^START_LIRCD=.*/START_LIRCD=\"true\"/g" $hwconfG
+    sed -i "s/^START_LIRCD=.*/START_LIRCD=\"true\"/g" $hwconf
     sed -i "s/^REMOTE_LIRCD_ARGS=.*/REMOTE_LIRCD_ARGS=\"--uinput\"/g" $hwconf
 
     default_remote
