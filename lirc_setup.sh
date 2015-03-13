@@ -39,7 +39,7 @@ __EOF
 lirc_setup() {
 	
 	# We can only install LIRC if kernel is > build#74
-	KBUILD=`uname -r | cud -d "-" -f2`
+	KBUILD=`uname -r | cut -d "-" -f2`
 	if [ $KBUILD -le 74 ]; then
 		msgbox "You can only switch to LIRC if your kernel is updated."
 		return
