@@ -188,6 +188,8 @@ do_udev_update() {
 		echo "KERNEL==\"ttySAC0\", SYMLINK+=\"ttyACM99\"" >> /etc/udev/rules.d/10-odroid.rules
 		echo "KERNEL==\"event*\", SUBSYSTEM==\"input\", MODE=\"0777\"" >> /etc/udev/rules.d/10-odroid.rules
 		echo "KERNEL==\"CEC\", MODE=\"0777\"" >> /etc/udev/rules.d/10-odroid.rules
+		echo "KERNEL==\"amvideo\", MODE=\"0666\"" >> /etc/udev/rules.d/10-odroid.rules
+		echo "KERNEL==\"amstream*\", MODE=\"0666\"" >> /etc/udev/rules.d/10-odroid.rules
 	fi
 	
 	msgbox "KERNEL-UPDATE: UDEV: udev rules for ODROID Installed"
