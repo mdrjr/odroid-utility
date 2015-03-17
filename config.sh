@@ -15,6 +15,8 @@ source $_B/armsoc.sh
 source $_B/change_hostname.sh
 source $_B/lirc_setup.sh
 source $_B/odroidc_hdmipass.sh
+source $_B/pulseaudio_control.sh
+
 
 # Get the board here
 get_board

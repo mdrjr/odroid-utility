@@ -12,3 +12,4 @@ xbmc_setup.sh
 xorg_config.sh
 lirc_setup.sh
 odroidc_hdmipass.sh
+pulseaudio_control.sh

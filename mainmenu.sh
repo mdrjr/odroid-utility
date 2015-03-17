@@ -9,6 +9,8 @@ while true; do
 	menu_items[8]="5"; menu_items[9]="Xorg On/Off"
 	menu_items[10]="6"; menu_items[11]="Rebuild Xorg DDX (fixes ABI errors)"
 	menu_items[12]="7"; menu_items[13]="Change Hostname"
+	menu_items[18]="10"; menu_items[19]="Pulse Audio Control (on/off)"
+	
 	if [ "$BOARD" = "odroidc" ]; then
 		# LIRC Menu
 		menu_items[14]="8"; menu_items[15]="Install LIRC"
@@ -36,6 +38,7 @@ while true; do
 		"7") change_hostname ;;
 		"8") lirc_setup ;;
 		"9") odroidc1_hdmipass ;;
+		"10") pulseaudio_control_onoff ;;
 		*) msgbox "Error 001. Please report on the forums" && exit 0 ;;
 		esac || msgbox "I don't know how you got here! >> $CC <<  Report on the forums"
 		
