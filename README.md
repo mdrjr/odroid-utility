@@ -21,7 +21,7 @@ Don't worry about the extra files. The script self-updates itself everytime its 
 
 **What is supported :**
 
-* Debian and Ubuntu ATM. More to come,
+* Debian and Ubuntu.
 * Xorg on/off,
 * Change hostname,
 * Configure HDMI (x/x2/u2/u3/c1) only,
@@ -32,8 +32,5 @@ Don't worry about the extra files. The script self-updates itself everytime its 
 
 **TODO :**
 
-* HDMI Configuration for XU,
-* XBMC Install/Update,
-* Support for other OS.
 
 Ideas and patchs are welcome. Either post a diff with your e-mail and name or submit a PR on github.
