@@ -29,9 +29,9 @@ else
 
 	#copy new content
 	cp -r ./administration $_B
-	cp -r ./administration $_B
-	cp -r ./administration $_B
-	cp -r ./administration $_B
+	cp -r ./config $_B
+	cp -r ./menu $_B
+	cp -r ./multimedia $_B
 	cp ./files.txt $_B/files.txt
 	cp ./odroid-utility.sh $_B/odroid-utility.sh
 	chmod +x $_B/odroid-utility.sh
