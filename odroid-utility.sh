@@ -42,8 +42,8 @@ initialization() {
       
 	update_internals
 
-		if [ -f $_B/config.sh ]; then
-			source $_B/config.sh
+		if [ -f $_B/config/config.sh ]; then
+			source $_B/config/config.sh
 		else
 			echo "Error. Couldn't start"
 			exit 0
