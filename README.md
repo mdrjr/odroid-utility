@@ -1,5 +1,6 @@
 TOOL - ODROID UTILITY
 =====================
+**UNOFFICIAL UPDATE**
 
 I've started to write this script to replace kernel-update. It does WAY more then the current kernel-update is doing. I plan to replace kernel-update with this tool very soon.
 
@@ -8,11 +9,13 @@ I've started to write this script to replace kernel-update. It does WAY more the
 **How to Install :**
 
 ```
+git clone https://github.com/api-walker/odroid-utility.git
+
+cd odroid-utility
+
 sudo -s
 
-wget -O /usr/local/bin/odroid-utility.sh https://raw.githubusercontent.com/mdrjr/odroid-utility/master/odroid-utility.sh
-
-chmod +x /usr/local/bin/odroid-utility.sh
+chmod +x updater.sh
 
 odroid-utility.sh
 ```
@@ -30,7 +33,18 @@ Don't worry about the extra files. The script self-updates itself everytime its 
 * Rebuilds Xorg DDX , installs new Mali drivers when they are available and fixes ABI errors,
 * Filesystem resize.
 
+**New features :*
+* Desktop Environments
+* Change password
+* Change locale
+* Change timezone
+* Change keyboard-layout
+* Changed kernel-update for odroid-c to direct update
+* Direct KODI installation on Odroid C1
+
 **TODO :**
+* test changes
+* LICENSE
 
 
 Ideas and patchs are welcome. Either post a diff with your e-mail and name or submit a PR on github.
