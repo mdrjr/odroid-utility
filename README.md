@@ -42,6 +42,9 @@ Don't worry about the extra files. The script self-updates itself everytime its 
 * Changed kernel-update for odroid-c to direct update
 * Direct KODI installation on Odroid C1
 
+**Disclaimer**
+* Some changes are based on raspi-config code
+
 **TODO :**
 * test changes
 * LICENSE
