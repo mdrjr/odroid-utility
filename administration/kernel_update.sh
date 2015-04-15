@@ -25,7 +25,7 @@ kernel_update() {
 	get_board
 	
 	while true; do
-		KO=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Kernel Update/Configuration" 0 0 0 \
+		KO=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Kernel Update/Configuration" 0 0 0 --cancel-button "Back" --ok-button "Select"\
 		"1" "Update Kernel" \
 		"2" "Install firmware files to /lib/firmware" \
 		"3" "Update boot scripts" \
@@ -91,7 +91,7 @@ do_kernel_update() {
 					return
 				fi
 		else
-			msgbox "You are using a new and updated image. For now on. You don't need to update the kernel here anymore. 'apt-get update && apt-get dist-upgrade' are enough!"
+			do_firmware_update
 			return
 		fi
 	fi
@@ -109,7 +109,9 @@ do_kernel_update() {
 
 do_firmware_update() {
 	if [ "$BOARD" = "odroidc" ]; then
-		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
+		echo "Updating firmware..."
+		apt-get update -y
+		apt-get dist-upgrade -y
 		return
 	fi
 
@@ -132,7 +134,7 @@ do_bootscript_update() {
 	cd $KTMP
 
 	if [ "$BOARD" = "odroidc" ]; then
-		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
+		do_firmware_update
 		return
 	fi
 
@@ -198,7 +200,7 @@ do_udev_update() {
 
 do_bootloader_update() {
 	if [ "$BOARD" = "odroidc" ]; then
-		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
+		do_firmware_update
 		return
 	fi
 
@@ -443,7 +445,7 @@ update_hwclock() {
 
 install_headers() { 
 	if [ "$BOARD" = "odroidc" ]; then
-		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
+		do_firmware_update
 		return
 	fi
 

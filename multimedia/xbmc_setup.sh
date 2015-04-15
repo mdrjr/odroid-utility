@@ -3,7 +3,8 @@
 xbmc_setup() {
 	get_board
 	if [ "$BOARD" = "odroidc" ]; then
-		msgbox "Use apt-get install kodi   or   apt-get update && apt-get dist-upgrade"
+		apt-get update -y
+		apt-get install kodi -y
 		return
 	fi
 

@@ -2,7 +2,7 @@
 
 
 pulseaudio_control_onoff() {
-	CC=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Pulse Audio control (On/Off)" 0 0 1 --cancel-button "Exit" --ok-button "Select" \
+	CC=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Pulse Audio control (On/Off)" 0 0 1 --cancel-button "Back" --ok-button "Select" \
 		"1" "Enable Pulseaudio (default)" \
 		"2" "Disable Pulseaudio" \
 		3>&1 1>&2 2>&3)
