@@ -33,7 +33,7 @@ Don't worry about the extra files. The script self-updates itself everytime its 
 * Rebuilds Xorg DDX , installs new Mali drivers when they are available and fixes ABI errors,
 * Filesystem resize.
 
-**New features :*
+**New features :**
 * Desktop Environments
 * Change password
 * Change locale
