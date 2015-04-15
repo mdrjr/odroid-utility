@@ -6,7 +6,7 @@ if [ `whoami` != "root" ]; then
 			echo "sudo $0"
 			exit 0
 fi
-if ! whiptail --yesno "This updater will remove the prevoius version and update to the newest! Do you agree?" 0 0; then
+if ! whiptail --yesno "This will replace fully the old version! Do you agree?" 0 0; then
 	echo "User canceled update."
 	exit 0
 else
@@ -26,7 +26,7 @@ else
 	rm $_B/lirc_setup.sh
 	rm $_B/odroidc_hdmipass.sh
 	rm $_B/pulseaudio_control.sh
-	
+
 	#copy new content
 	cp -r ./administration $_B
 	cp -r ./administration $_B
