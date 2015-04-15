@@ -79,7 +79,7 @@ update_internals() {
 		curl -s $baseurl/$fu > $_B/$fu
 	done
 
-	export _REV="1.4 GitRev: $APP_REV"
+	export _REV="2.0 BETA GitRev: $APP_REV"
 	
 	chmod +x $_B/odroid-utility.sh
 }
