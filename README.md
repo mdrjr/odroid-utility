@@ -41,13 +41,17 @@ Don't worry about the extra files. The script self-updates itself everytime its 
 * Change keyboard-layout
 * Changed kernel-update for odroid-c to direct update
 * Direct KODI installation on Odroid C1
+* Start without updating
+* Some fixes
 
 **Disclaimer**
 * Some changes are based on raspi-config code
 
 **TODO :**
-* test changes
-* LICENSE
+* full testing
+
+**State :**
+* BETA
 
 
 Ideas and patchs are welcome. Either post a diff with your e-mail and name or submit a PR on github.
