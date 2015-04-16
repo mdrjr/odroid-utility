@@ -11,7 +11,7 @@ Note that a hostname cannot beggin or end with a hyphen.
 No other char/symbol/punctuation or white-spaces are allowed." 0 0 0
 	
 	CH=`cat /etc/hostname | tr -d " \t\n\r"`
-	NH=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --inputbox "Hostname" 8 78 "$CH" 3>&1 1>&2 2>&3)
+	NH=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --inputbox "Hostname" 8 54 "$CH" 3>&1 1>&2 2>&3)
 	
 	if [ $? -eq 0 ]; then
 		echo $NH > /etc/hostname
