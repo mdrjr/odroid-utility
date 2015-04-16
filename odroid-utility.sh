@@ -34,14 +34,15 @@ initialization() {
                         lsb_release -a
                         exit 0
                         ;;
-                esac
+                esac        
 
-        # now that we know what we are running, lets grab all the OS Packages that we need.
-
-	install_bootstrap_packages
-      
-	update_internals
-
+        # if '--update' is passed, then update internals
+		if [ $1 == '--update' ]; then
+			install_bootstrap_packages      
+			update_internals
+		fi 
+	
+		# start main application
 		if [ -f $_B/config/config.sh ]; then
 			source $_B/config/config.sh
 		else
