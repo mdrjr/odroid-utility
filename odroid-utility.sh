@@ -37,7 +37,7 @@ initialization() {
                 esac        
 
         # if '--update' is passed, then update internals
-		if [ $1 == '--update' ]; then
+		if [ '$1' == '--update' ]; then
 			install_bootstrap_packages      
 			update_internals
 		fi 
