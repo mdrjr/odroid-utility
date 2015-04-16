@@ -35,5 +35,6 @@ else
 	cp ./files.txt $_B/files.txt
 	cp ./odroid-utility.sh $_B/odroid-utility.sh
 	chmod +x $_B/odroid-utility.sh
+	clear
 	whiptail --msgbox "odroid-utility was updated!" 0 0 0
 fi
