@@ -34,6 +34,7 @@ Don't worry about the extra files. The script self-updates itself everytime its 
 * Filesystem resize.
 
 **New features :**
+
 * Desktop Environments
 * Change password
 * Change locale
@@ -44,14 +45,13 @@ Don't worry about the extra files. The script self-updates itself everytime its 
 * Start without updating
 * Some fixes
 
-**Disclaimer**
+**State :**
+* BETA
+
+**Disclaimer :**
 * Some changes are based on raspi-config code
 
 **TODO :**
 * full testing
-
-**State :**
-* BETA
-
 
 Ideas and patchs are welcome. Either post a diff with your e-mail and name or submit a PR on github.
