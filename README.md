@@ -30,7 +30,7 @@ sudo odroid-utility.sh [--update]
 ```
 
 **What is supported :**
-* OLD :
+* Old :
   * Debian and Ubuntu.
   * Xorg on/off,
   * Change hostname,
@@ -39,7 +39,7 @@ sudo odroid-utility.sh [--update]
   * boot.scr's update (all boards) Oh yes. Updating the kernel doesn't replace your boot.scr's anymore. If you was using custom ones to boot from hdd then they should be safe now,
   * Rebuilds Xorg DDX , installs new Mali drivers when they are available and fixes ABI errors,
   * Filesystem resize.
-* NEW :
+* New :
   * Desktop Environments
   * Change password
   * Change locale
@@ -55,7 +55,7 @@ sudo odroid-utility.sh [--update]
 **Disclaimer :**
 * Some changes are based on raspi-config code.
 
-**TODO :**
+**Todo :**
 * full testing
 
 Ideas and patches are welcome. Please submit a pull request on github.
