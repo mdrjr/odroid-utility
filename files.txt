@@ -21,3 +21,4 @@ multimedia/odroidc_hdmipass.sh
 multimedia/pulseaudio_control.sh
 multimedia/xbmc_setup.sh
 odroid-utility.sh
+updater.sh
