@@ -36,11 +36,17 @@ initialization() {
                         ;;
                 esac        
 
-        # if '--update' is passed, then update internals
-		if [ '$1' == '--update' ]; then
-			install_bootstrap_packages      
-			update_internals
-		fi 
+        	# if '--skip-update' is passed, then skip update of internals
+	        if [ -z "$1" ]
+		then
+		   install_bootstrap_packages      
+		   update_internals
+		elif [ "$1" == "--skip-update" ]
+		then
+		   echo 'Updates skipped'
+		else
+		   echo 'Usage: sudo odroid-utility.sh [--skip-update]'
+		fi
 	
 		# start main application
 		if [ -f $_B/config/config.sh ]; then
