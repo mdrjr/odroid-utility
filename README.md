@@ -24,9 +24,9 @@ odroid-utility.sh
 **Usage :**
 
 ```
-sudo odroid-utility.sh [--update]
+sudo odroid-utility.sh [--skip-update]
 
---update = Update the internals
+--skip-update = Skip update of the internals
 ```
 
 **What is supported :**
