@@ -2,6 +2,7 @@ administration/armsoc.sh
 administration/change_hostname.sh
 administration/change_locale.sh
 administration/change_password.sh
+administration/change_ssh.sh
 administration/change_timezone.sh
 administration/configure_keyboard.sh
 administration/fs_resize.sh
