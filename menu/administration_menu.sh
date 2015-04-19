@@ -10,8 +10,9 @@ administration_menu() {
 		"4" "Xorg on/off" \
 		"5" "Rebuild Xorg DDX (fixes ABI errors)" \
 		"6" "Kernel Update" \
-		"7" "Internationalization" \
-		"8" "Desktop Environments" \
+		"7" "Change SSH" \
+		"8" "Internationalization" \
+		"9" "Desktop Environments" \
 		3>&1 1>&2 2>&3)
 	
 		AR=$?
@@ -26,8 +27,9 @@ administration_menu() {
 				"4") xorg_config ;;
 				"5") rebuild_armsoc ;;
 				"6") kernel_update ;;
-				"7") internationalization_menu ;;
-				"8") desktop_environment_menu ;;
+				"7") do_ssh ;;
+				"8") internationalization_menu ;;
+				"9") desktop_environment_menu ;;
 				*) msgbox "Administration: Error. You shouldn't be here. Value $AO please report this on the forums" ;;
 			esac
 		fi
