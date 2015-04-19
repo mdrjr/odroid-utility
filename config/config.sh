@@ -23,6 +23,7 @@ source $_B/administration/kernel_update.sh
 source $_B/administration/xorg_config.sh
 source $_B/administration/change_hostname.sh
 source $_B/administration/change_password.sh
+source $_B/administration/change_ssh.sh
 source $_B/administration/change_locale.sh
 source $_B/administration/change_timezone.sh
 source $_B/administration/configure_keyboard.sh
