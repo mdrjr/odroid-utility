@@ -1,13 +1,8 @@
 #!/bin/bash
 
 change_locale() {
- 
- #bad implementation:
- #locales=$(locale -a)  
- #selected_locale=$(whiptail --inputbox "$locales" 20 54 3>&1 1>&2 2>&3)
- 
- #using cmdline
- echo "Please select one of the following locales:"
+  #using cmdline
+ echo "Please select one of the following available locales:"
 
  #sleep 1 second
  sleep 1
@@ -20,9 +15,11 @@ change_locale() {
  read selected_locale
 
  #update
- update-locale LANG=$selected_locale
+ rm /etc/locale.gen
  
- dpkg-reconfigure locales
+ dpkg-reconfigure -f noninteractive locales
+    
+ update-locale LANG="$selected_locale"
  
  msgbox "Please restart!"
 }
