@@ -3,13 +3,12 @@
 # ODROID Utility v2
 
 # For debug uncomment
-set -x
+# set -x
 
 # Global defines
 _B="/usr/local/bin"
 
 initialization() {
-	
 		if [ `whoami` != "root" ]; then
 			sudo $0 $*
 			exit $?
@@ -56,8 +55,12 @@ initialization() {
 		   echo 'Authors:'
 		   echo 'Maintainer:  mdrjr'
 		   echo 'Forker:  api-walker'
+		   exit 0
 		else
-		   echo 'Usage: sudo odroid-utility.sh [--skip-update]'
+		   echo 'Usage'
+		   echo 'sudo odroid-utility.sh [--skip-update]'
+		   echo 'sudo odroid-utility.sh [--help]'
+		   exit 0
 		fi
 		
 		# start main application
@@ -104,4 +107,4 @@ update_internals() {
 }
 
 # Start the script
-initialization
+initialization $1
