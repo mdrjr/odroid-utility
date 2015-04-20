@@ -2,9 +2,8 @@
 _B="/usr/local/bin"
 
 if [ `whoami` != "root" ]; then
-			echo "You must run the app as root."
-			echo "sudo $0"
-			exit 0
+	sudo $0 $*
+	exit 0
 fi
 if ! whiptail --yesno "This updater will remove the prevoius version and update to the newest! Do you agree?" 0 0; then
 	echo "User canceled update."
