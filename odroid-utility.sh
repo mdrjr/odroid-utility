@@ -11,9 +11,8 @@ _B="/usr/local/bin"
 initialization() {
 	
 		if [ `whoami` != "root" ]; then
-			echo "You must run the app as root."
-			echo "sudo $0"
-			exit 0
+			sudo $0 $*
+			exit $?
 		fi
 
         # check what distro we are runnig.
@@ -36,10 +35,10 @@ initialization() {
                         ;;
                 esac        
 
-        	# if '--skip-update' is passed, then skip update of internals
-	        if [ -z "$1" ]
+		# if '--skip-update' is passed, then skip update of internals
+	    if [ -z "$1" ]
 		then
-		   install_bootstrap_packages      
+		   install_bootstrap_packages
 		   update_internals
 		elif [ "$1" == "--skip-update" ]
 		then
@@ -47,7 +46,7 @@ initialization() {
 		else
 		   echo 'Usage: sudo odroid-utility.sh [--skip-update]'
 		fi
-	
+		
 		# start main application
 		if [ -f $_B/config/config.sh ]; then
 			source $_B/config/config.sh
