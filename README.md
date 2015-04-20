@@ -45,7 +45,6 @@ sudo odroid-utility.sh [--skip-update]
   * Change locale
   * Change timezone
   * Change keyboard-layout
-  * SSH configuration
   * Changed kernel-update for odroid-c to direct update
   * Direct KODI installation on Odroid C1
   * Start without updating
