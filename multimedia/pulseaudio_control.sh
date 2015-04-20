@@ -8,7 +8,7 @@ pulseaudio_control_onoff() {
 		3>&1 1>&2 2>&3)
 
 	ret=$?
-	
+
 	if [ $ret -eq 1 ]; then
 		return 0
 	elif [ $ret -eq 0 ]; then
@@ -22,7 +22,7 @@ pulseaudio_control_onoff() {
 			*) ;;
 		esac
 	fi
-	
+
 }
 
 enable_pulse() {

@@ -62,7 +62,7 @@ initialization() {
 		   echo 'sudo odroid-utility.sh [--help]'
 		   exit 0
 		fi
-		
+
 		# start main application
 		if [ -f $_B/config/config.sh ]; then
 			source $_B/config/config.sh
@@ -91,10 +91,10 @@ install_bootstrap_packages() {
 update_internals() {
 	echo "Performing scripts updates"
 	baseurl="https://raw.githubusercontent.com/mdrjr/odroid-utility/master"
-	
+
 	FILES=`curl -s $baseurl/files.txt`
 	APP_REV=`curl -s https://api.github.com/repos/mdrjr/odroid-utility/git/refs/heads/master | awk '{ if ($1 == "\"sha\":") { print substr($2, 2, 40) } }'`
-	
+
 	for fu in $FILES; do
 		echo "Updating: $fu"
 		rm -fr $_B/$fu
@@ -102,7 +102,7 @@ update_internals() {
 	done
 
 	export _REV="2.0 BETA GitRev: $APP_REV"
-	
+
 	chmod +x $_B/odroid-utility.sh
 }
 

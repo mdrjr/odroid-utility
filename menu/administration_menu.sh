@@ -1,7 +1,7 @@
 #!/bin/bash
 
 administration_menu() {
-	
+
 	while true; do
 		AO=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Administration/Configuration" 0 0 1 --cancel-button "Back" --ok-button "Select"\
 		"1" "Change hostname" \
@@ -13,9 +13,9 @@ administration_menu() {
 		"7" "Internationalization" \
 		"8" "Desktop Environments" \
 		3>&1 1>&2 2>&3)
-	
+
 		AR=$?
-	
+
 		if [ $AR -eq 1 ]; then
 			return 0
 		else
@@ -31,6 +31,6 @@ administration_menu() {
 				*) msgbox "Administration: Error. You shouldn't be here. Value $AO please report this on the forums" ;;
 			esac
 		fi
-	
+
 	done
 }

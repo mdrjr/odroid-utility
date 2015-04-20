@@ -8,7 +8,7 @@ odroidc1_hdmipass() {
 		3>&1 1>&2 2>&3)
 
 	ret=$?
-	
+
 	if [ $ret -eq 1 ]; then
 		return 0
 	elif [ $ret -eq 0 ]; then
@@ -24,7 +24,7 @@ odroidc1_hdmipass() {
 			*) ;;
 		esac
 	fi
-	
+
 }
 
 enable_c1_pass() {
@@ -41,7 +41,7 @@ ctl.!default {
         card 0
 }
 __EOF__
-	
+
 	msgbox "HDMI Audio Passthrough is now enabled. Please reboot to take effect"
 }
 

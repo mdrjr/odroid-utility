@@ -1,12 +1,12 @@
 #!/bin/bash
 
 multimedia_menu() {
-	
+
 	while true; do
 	menu_items[0]="1"; menu_items[1]="HDMI Configuration"
 	menu_items[2]="2"; menu_items[3]="Install/Update XBMC (Ubuntu Only)"
 	menu_items[4]="3"; menu_items[5]="Pulse Audio Control (on/off)"
-	
+
 	if [ "$BOARD" = "odroidc" ]; then
 		# LIRC Menu
 		menu_items[6]="4"; menu_items[7]="Install LIRC"
@@ -16,9 +16,9 @@ multimedia_menu() {
 		IO=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Multimedia/Configuration" 0 0 0 --cancel-button "Back" --ok-button "Select"\
 		"${menu_items[@]}" \
 		3>&1 1>&2 2>&3)
-	
+
 		IR=$?
-	
+
 		if [ $IR -eq 1 ]; then
 			return 0
 		else
@@ -31,6 +31,6 @@ multimedia_menu() {
 				*) msgbox "Multimedia: Error. You shouldn't be here. Value $IO please report this on the forums" ;;
 			esac
 		fi
-	
+
 	done
 }

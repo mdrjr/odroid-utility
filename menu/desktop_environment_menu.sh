@@ -12,9 +12,9 @@ desktop_environment_menu() {
 		"5" "Fully remove XFCE" \
 		"6" "Fully remove LXDE" \
 		3>&1 1>&2 2>&3)
-	
+
 		DER=$?
-	
+
 		if [ $DER -eq 1 ]; then
 			return 0
 		else
@@ -28,7 +28,7 @@ desktop_environment_menu() {
 				*) msgbox "Desktop Environment: Error. You shouldn't be here. Value $DEO please report this on the forums" ;;
 			esac
 		fi
-		msgbox "Logout and change the desktop environment in login manager."	
+		msgbox "Logout and change the desktop environment in login manager."
 
 	done
 }
