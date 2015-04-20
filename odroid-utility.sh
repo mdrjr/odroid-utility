@@ -3,7 +3,7 @@
 # ODROID Utility v2
 
 # For debug uncomment
-# set -x
+set -x
 
 # Global defines
 _B="/usr/local/bin"
@@ -43,6 +43,19 @@ initialization() {
 		elif [ "$1" == "--skip-update" ]
 		then
 		   echo 'Updates skipped'
+	    elif [ "$1" == "--help" ]
+		then
+		   echo 'Help'
+		   echo 'Arguments:'
+		   echo '--skip-update - Skips update on start'
+		   echo '--help - Shows this help'
+		   echo 
+		   echo 'About:'
+		   echo 'This tool was developed to make configuration of your odroid easy.'
+		   echo
+		   echo 'Authors:'
+		   echo 'Maintainer:  mdrjr'
+		   echo 'Forker:  api-walker'
 		else
 		   echo 'Usage: sudo odroid-utility.sh [--skip-update]'
 		fi
