@@ -38,7 +38,12 @@ resize_p2() {
 	sleep 4
 	
 	p2_start=`fdisk -l /dev/mmcblk0 | grep mmcblk0p2 | awk '{print $2}'`
-	p2_finish=$((`fdisk -l /dev/mmcblk0 | grep total | grep sectors | awk '{printf $8}'` - 1024))
+	
+	if [ "$DISTRO_VERSION" = "15.04" ]; then
+		p2_finish=$((`fdisk -l /dev/mmcblk0 | grep Disk | grep sectors | awk '{printf $7}'` - 1024))
+	else
+		p2_finish=$((`fdisk -l /dev/mmcblk0 | grep total | grep sectors | awk '{printf $8}'` - 1024))
+	fi
 	
 	fdisk /dev/mmcblk0 <<EOF &>> $rsflog
 p
