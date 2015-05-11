@@ -3,7 +3,7 @@
 setup_hdmi() {
 
 	get_board
-	
+
 	if [ "$BOARD" = "odroidc" ]; then
 		do_odroidc_hdmi
 		return 0
@@ -22,9 +22,9 @@ setup_hdmi() {
 	"5" "1280x720 (720P) Using generic timings (NO-EDID)" \
 	"6" "1024x768 Using generic timings (NO-EDID) (Failsafe)" \
 	3>&1 1>&2 2>&3)
-	
+
 	HR=$?
-	
+
 	if [ $HR -eq 1 ]; then
 		return 0
 	else
@@ -41,7 +41,7 @@ do_change_hdmi() {
 		msgbox "HDMI: Your distro $DISTRO isn't supported yet. Please report on the forums"
 		return 0
 	fi
-	
+
 	case "$1" in 
 		"1") cp $BASE/boot-auto_edid.scr $BASE/boot.scr ;;
 		"2") cp $BASE/boot-1080p-edid.scr $BASE/boot.scr ;;
@@ -52,10 +52,10 @@ do_change_hdmi() {
 
 		*) msgbox "HDMI: Error. You shouldn't be here. Report on the forums. Error HDMI-$1" ;;
 	esac
-			
+
 	msgbox "HDMI Configuration changed. Please reboot"
 	REBOOT=1
-		
+
 }
 
 do_odroidc_hdmi() {
@@ -71,7 +71,7 @@ do_odroidc_hdmi() {
 	while read line; do
 
 		if [[ $line =~ "setenv m \"" ]]; then
-		
+
 			if [[ ${line:0:1} == "s" ]]; then
 				export selected=`echo $line | awk '{print $3}' | sed s/"\""//g`
 			fi
@@ -81,7 +81,7 @@ do_odroidc_hdmi() {
 
 			R_VALUE[$COUNT]=$lt
 			R_NAME[$COUNT]=$la
-		
+
 			((COUNT++))
 		fi
 	done < /media/boot/boot.ini
@@ -134,11 +134,11 @@ do_odroidc_hdmi() {
 	mv /tmp/new.ini /media/boot/boot.ini
 	rm -fr /tmp/tmp1.ini
 	sync
-	
+
 	msgbox "Changed screen resolution from $selected to $NR. Please reboot"
-	
+
 	# For the sake of sanity
 	export HDMI_MENU=""; export p=""; export NR=""; export COUNT=""; export selected=""; export R_VALUE=""; export R_NAME=""
-	
+
 	REBOOT=1
 }

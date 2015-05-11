@@ -20,7 +20,7 @@ dlf_fast() {
 	# $1 is the URL
 	# $2 is the name of what is downloading to show on the window
 	# $3 is the output file name
-	
+
 	axel -n 5 "$1" -o $3 2>&1 | stdbuf -o0 awk '/[0-9][0-9]?%+/ { print substr($0,2,3) }' | whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --gauge "$2" 0 0 100
 }
 
