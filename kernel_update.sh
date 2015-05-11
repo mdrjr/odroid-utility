@@ -21,11 +21,11 @@ export C_K_PKG_URL="http://builder.mdrjr.net/kernel-3.10-c/00-LATEST"
 
 
 kernel_update() {
-
+	
 	get_board
-
+	
 	while true; do
-		KO=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Kernel Update/Configuration" 0 0 0 --cancel-button "Back" --ok-button "Select"\
+		KO=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Kernel Update/Configuration" 0 0 0 \
 		"1" "Update Kernel" \
 		"2" "Install firmware files to /lib/firmware" \
 		"3" "Update boot scripts" \
@@ -33,9 +33,9 @@ kernel_update() {
 		"5" "Update the bootloader" \
 		"6" "Exit" \
 		3>&1 1>&2 2>&3)
-
+	
 		KR=$?
-
+	
 		if [ $KR -eq 1 ]; then
 			return 0
 		else
@@ -49,7 +49,7 @@ kernel_update() {
 				*) msgbox "KERNEL-UPDATE: Error. You shouldn't be here. Value $KO please report this on the forums" ;;
 			esac
 		fi
-
+	
 	done
 }
 
@@ -57,7 +57,7 @@ do_kernel_download() {
 	rm -fr $KTMP
 	mkdir -p $KTMP
 	cd $KTMP
-
+	
 	if [ "$BOARD" = "odroidxu" ]; then
 		dlf_fast $XU_K_PKG_URL/$BOARD.tar.xz "Downloading ODROID-XU Kernel. Please wait." $KTMP/$BOARD.tar.xz
 		dlf_fast $XU_K_PKG_URL/$BOARD.tar.xz.md5sum "Downloading ODROID-XU Kernel MD5SUM. Please wait." $KTMP/$BOARD.tar.xz.md5sum
@@ -71,7 +71,7 @@ do_kernel_download() {
 		dlf_fast $K_PKG_URL/$BOARD.tar.xz "Downloading $BOARD Kernel. Please Wait." $KTMP/$BOARD.tar.xz
 		dlf_fast $K_PKG_URL/$BOARD.tar.xz.md5sum "Downloading $BOARD Kernel MD5SUM. Please Wait." $KTMP/$BOARD.tar.xz.md5sum
 	fi
-
+	
 	VALID=`cat $KTMP/$BOARD.tar.xz.md5sum | awk '{printf $1}'`
 	CURRENT=`md5sum $KTMP/$BOARD.tar.xz | awk '{printf $1}'`
 	if [ "$VALID" != "$CURRENT" ]; then
@@ -81,7 +81,7 @@ do_kernel_download() {
 }
 
 do_kernel_update() {
-
+	
 	if [ "$BOARD" = "odroidc" ]; then
 		if [ ! -f /etc/apt/sources.list.d/odroid.list ]; then
 				if ! whiptail --yesno "It looks like you are running image 1.0 or 1.1 for -C1. I can upgrade this to 1.2 for you. I need 500MB of disk space to do that. Are you ok with it ?" 0 0; then
@@ -91,13 +91,13 @@ do_kernel_update() {
 					return
 				fi
 		else
-			do_firmware_update
+			msgbox "You are using a new and updated image. For now on. You don't need to update the kernel here anymore. 'apt-get update && apt-get dist-upgrade' are enough!"
 			return
 		fi
 	fi
-
+					
 	do_kernel_download
-
+	
 	case "$DISTRO" in 
 		"ubuntu")
 			do_ubuntu_kernel_update ;;
@@ -109,9 +109,7 @@ do_kernel_update() {
 
 do_firmware_update() {
 	if [ "$BOARD" = "odroidc" ]; then
-		echo "Updating firmware..."
-		apt-get update -y
-		apt-get dist-upgrade -y
+		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
 		return
 	fi
 
@@ -124,7 +122,7 @@ do_firmware_update() {
 	(cd /lib/firmware && tar xf $KTMP/firmware.tar)
 	msgbox "KERNEL-UPDATE: Done. Firmware updated"
 	rm -fr $KTMP
-
+	
 }
 
 do_bootscript_update() {
@@ -134,7 +132,7 @@ do_bootscript_update() {
 	cd $KTMP
 
 	if [ "$BOARD" = "odroidc" ]; then
-		do_firmware_update
+		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
 		return
 	fi
 
@@ -177,7 +175,7 @@ do_bootscript_update() {
 		msgbox "KERNEL-UPDATE: bootscript: Distro not supported"
 		;;
 	esac
-
+	
 	msgbox "KERNEL-UPDATE: boostscript: Boot scripts updated"
 }
 
@@ -193,14 +191,14 @@ do_udev_update() {
 		echo "KERNEL==\"amvideo\", MODE=\"0666\"" >> /etc/udev/rules.d/10-odroid.rules
 		echo "KERNEL==\"amstream*\", MODE=\"0666\"" >> /etc/udev/rules.d/10-odroid.rules
 	fi
-
+	
 	msgbox "KERNEL-UPDATE: UDEV: udev rules for ODROID Installed"
 
 }
 
 do_bootloader_update() {
 	if [ "$BOARD" = "odroidc" ]; then
-		do_firmware_update
+		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
 		return
 	fi
 
@@ -216,7 +214,7 @@ do_bootloader_update() {
 			return
 		fi
 	fi
-
+	
 	if [ -n "$emmc" ]; then
 		# Going eMMC Mode
 		if [ "$BOARD" = "odroidx" ] || [ "$BOARD" = "odroidx2" ] || [ "$BOARD" = "odroidu2" ]; then
@@ -250,17 +248,17 @@ do_bootloader_update() {
 		fi
 	fi
 
-
+	
 	BLTEMP=/tmp/blTemp
 	rm -fr $BLTEMP
 	mkdir $BLTEMP
-
-
+	
+	
 	if ! whiptail --yesno "I found that you booted from a $D. If that's correct say Yes and I'll download and update your bootloaders. Otherwise please say NO" 0 0; then
 		msgbox "Understood! Aborting!"
 		return
 	fi
-
+	
 	if [ "$BOARD" = "odroidxu3" ]; then
 		# 5422 Update
 		# bl1
@@ -320,35 +318,35 @@ do_bootloader_update() {
 	dd iflag=dsync oflag=dsync if=$BLTEMP/uboot.bin of=$device seek=$uboot_position
 	echo "*** Update tzsw" 
 	dd iflag=dsync oflag=dsync if=$BLTEMP/tzsw.bin of=$device seek=$tzsw_position
-
+	
 	msgbox "Bootloader Update complete"
-
+	
 }
 
 do_ubuntu_kernel_update() { 
 	cd $KTMP
-
+	
 	echo "*** Installing new kernel. Please wait. A backup and log will be saved on /root"
 	export klog=/root/kernel_update-log-$DATE.txt
-
+	
 	tar -Jcf /root/kernel-backup-$DATE.tar.xz /lib/modules /media/boot &>> $klog
 	xz -d $BOARD.tar.xz &>> $klog
 	tar xf $BOARD.tar &>> $klog
-
+	
 	rm -fr /media/boot/exynos5422-odroidxu3.dtb /media/boot/meson8b_odroidc.dtb /media/boot/zImage* /media/boot/uImage* /media/boot/uInitrd* /lib/modules/3.10* /lib/modules/3.8.13* /lib/modules/3.4* &>> $klog
-
+	
 	if [ "$BOARD" = "odroidc" ]; then
 		cp -aRP boot/uImage /media/boot/uImage &>> $klog
 		cp -aRP boot/meson8b_odroidc.dtb /media/boot/meson8b_odroidc.dtb &>> $klog
 	else
 		cp -aRP boot/zImage /media/boot/zImage &>> $klog
 	fi
-
+	
 	if [ "$BOARD" = "odroidxu3" ]; then
 		cp -aRP boot/exynos5422-odroidxu3.dtb /media/boot/exynos5422-odroidxu3.dtb &>> $klog
 	fi
 	cp -aRP lib/modules/* /lib/modules &>> $klog
-
+	
 	if [ -f /etc/initramfs-tools/initramfs.conf ]; then
 		cat /etc/initramfs-tools/initramfs.conf | sed s/"MODULES=most"/"MODULES=dep"/g > /tmp/a.conf
 		mv /tmp/a.conf /etc/initramfs-tools/initramfs.conf
@@ -370,7 +368,7 @@ do_ubuntu_kernel_update() {
 		echo "exit 0" >> /etc/initramfs/post-update.d/flash-kernel
 		chmod +x /etc/initramfs/post-update.d/flash-kernel
 	fi
-
+	
 	if [ "$BOARD" != "odroidxu" ]; then
 		update_hwclock
 	fi
@@ -378,33 +376,33 @@ do_ubuntu_kernel_update() {
 	if [ "$BOARD" = "odroidx" ] || [ "$BOARD" = "odroidx2" ]; then
 		cp $KTMP/boot/zImage.lcdkit /media/boot
 	fi
-
+	
 	msgbox "KERNEL-UPDATE: Done. Your kernel should be updated now.
 	Check /root for the backup and log files.
 	BACKUP: /root/kernel-backup-$DATE.tar.xz
 	LOG: $klog"
-
+	
 	rm -fr $KTMP
 }
 
 do_debian_kernel_update() { 
 	cd $KTMP
-
+	
 	echo "*** Installing new kernel. Please way. A backup and log will be saved on /root"
 	export klog=/root/kernel_update-log-$DATE.txt
-
+	
 	tar -Jcf /root/kernel-backup-$DATE.tar.xz /lib/modules /boot &>> $klog
 	xz -d $BOARD.tar.xz &>> $klog
 	tar xf $BOARD.tar &>> $klog
-
+	
 	rm -fr /boot/exynos5422-odroidxu3.dtb /boot/zImage* /boot/uImage* /boot/uInitrd* /lib/modules/3.8.13* /lib/modules/3.4* &>> $klog
-
+	
 	cp -aRP boot/zImage /boot/zImage &>> $klog
 	if [ "$BOARD" = "odroidxu3" ]; then
 		cp -aRP boot/exynos5422-odroidxu3.dtb /boot/exynos5422-odroidxu3.dtb &>> $klog
 	fi
 	cp -aRP lib/modules/* /lib/modules &>> $klog
-
+	
 	if [ -f /etc/initramfs-tools/initramfs.conf ]; then
 		cat /etc/initramfs-tools/initramfs.conf | sed s/"MODULES=most"/"MODULES=dep"/g > /tmp/a.conf
 		mv /tmp/a.conf /etc/initramfs-tools/initramfs.conf
@@ -420,7 +418,7 @@ do_debian_kernel_update() {
 		axel -o $KTMP/hwc.tar -n 2 -q http://builder.mdrjr.net/tools/xubuntu_hwcomposer.tar &>> $klog
 		(cd /usr && tar xf $KTMP/hwc.tar) &>> $klog
 	fi
-
+	
 	if [ "$BOARD" != "odroidxu" ]; then
 		update_hwclock
 	fi
@@ -428,12 +426,12 @@ do_debian_kernel_update() {
 	if [ "$BOARD" = "odroidx" ] || [ "$BOARD" = "odroidx2" ]; then
 		cp $KTMP/boot/zImage.lcdkit /boot
 	fi
-
+	
 	msgbox "KERNEL-UPDATE: Done. Your kernel should be updated now.
 	Check /root for the backup and log files.
 	BACKUP: /root/kernel-backup-$DATE.tar.xz
 	LOG: $klog"
-
+	
 	rm -fr $KTMP
 }
 
@@ -445,7 +443,7 @@ update_hwclock() {
 
 install_headers() { 
 	if [ "$BOARD" = "odroidc" ]; then
-		do_firmware_update
+		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
 		return
 	fi
 
