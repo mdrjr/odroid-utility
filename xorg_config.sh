@@ -2,6 +2,9 @@
 
 
 xorg_config() {
+	
+	get_board
+	
 	CC=$(whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --menu "Xorg Config" 0 0 1 --cancel-button "Exit" --ok-button "Select" \
 		"1" "Enable Xorg" \
 		"2" "Disable Xorg" \
@@ -29,6 +32,12 @@ xorg_config() {
 
 enable_xorg_at_boot() {
 	
+	# SystemD on Ubuntu 15.04
+	if [ "$BOARD" = "odroidxu3" ] && [ "$DISTRO_VERSION" = "15.04" ]; then
+		systemctl set-default graphical.target
+		return
+	fi
+	
 	if [ "$DISTRO" = "ubuntu" ]; then
 		rm -fr /etc/init/lightdm.override
 	elif [ "$DISTRO" = "debian" ]; then
@@ -41,6 +50,13 @@ enable_xorg_at_boot() {
 }
 
 disable_xorg_at_boot() {
+
+	# SystemD on Ubuntu 15.04
+	if [ "$BOARD" = "odroidxu3" ] && [ "$DISTRO_VERSION" = "15.04" ]; then
+		systemctl set-default multi-user.target
+		return
+	fi
+
 	
 	if [ "$DISTRO" = "ubuntu" ]; then
 		echo "manual" > /etc/init/lightdm.override
