@@ -55,6 +55,6 @@ do_5422_1504_apt_update() {
 		apt-get -y dist-upgrade
 		apt-get -y install linux-image-xu3
 		msgbox "Your system is now up to date."
-		return
+		exit
 	fi
 }
