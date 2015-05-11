@@ -15,12 +15,7 @@ rebuild_armsoc() {
 		return
 	fi
 	
-	if [ "$BOARD" = "odroidxu3" ] && [ "$DISTRO_VERSION" = "15.04" ]; then
-		apt-get -y update
-		apt-get -y dist-upgrade
-		msgbox "All updates performed. You don't need to run any other updates."
-		return
-	fi
+	do_5422_1504_apt_update
 	
 	if [ "$DISTRO" = "ubuntu" ]; then
 		armsoc_rebuild_ubuntu

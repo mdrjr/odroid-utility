@@ -98,14 +98,8 @@ do_kernel_update() {
 			return
 		fi
 	fi
-	
-	if [ "$BOARD" = "odroidxu3" ] && [ "$DISTRO_VERSION" = "15.04" ]; then
-		apt-get -y update
-		apt-get -y dist-upgrade
-		apt-get -y install linux-image-xu3
-		msgbox "Your system is now up to date."
-		return
-	fi
+
+	do_5422_1504_apt_update	
 					
 	do_kernel_download
 	
@@ -120,12 +114,7 @@ do_kernel_update() {
 
 do_firmware_update() {
 	
-	if [ "$BOARD" = "odroidxu3" ] && [ "$DISTRO_VERSION" = "15.04" ]; then
-		apt-get -y update
-		apt-get -y install linux-firmware
-		msgbox "linux-firmware package install or updated."
-		return
-	fi
+	do_5422_1504_apt_update	
 	
 	if [ "$BOARD" = "odroidc" ]; then
 		apt-get -y update
@@ -151,6 +140,8 @@ do_bootscript_update() {
 	rm -fr $KTMP
 	mkdir -p $KTMP
 	cd $KTMP
+	
+	do_5422_1504_apt_update
 
 	if [ "$BOARD" = "odroidc" ]; then
 		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
@@ -202,6 +193,8 @@ do_bootscript_update() {
 
 do_udev_update() {
 
+	do_5422_1504_apt_update
+
 	if [ "$DISTRO" = "ubuntu" ] || [ "$DISTRO" = "debian" ]; then
 		echo "KERNEL==\"mali\",SUBSYSTEM==\"misc\",MODE=\"0777\"" > /etc/udev/rules.d/10-odroid.rules
 		echo "KERNEL==\"mali0\",SUBSYSTEM==\"misc\",MODE=\"0777\"" >> /etc/udev/rules.d/10-odroid.rules
@@ -218,6 +211,9 @@ do_udev_update() {
 }
 
 do_bootloader_update() {
+	
+	do_5422_1504_apt_update
+	
 	if [ "$BOARD" = "odroidc" ]; then
 		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
 		return
@@ -457,12 +453,21 @@ do_debian_kernel_update() {
 }
 
 update_hwclock() {
+	
+		do_5422_1504_apt_update
+	
         mv /sbin/hwclock /sbin/hwclock.orig
         axel -o /sbin/hwclock -q http://builder.mdrjr.net/tools/hwclock &>> $klog
         chmod 0755 /sbin/hwclock
 }
 
 install_headers() { 
+	do_5422_1504_apt_update
+	
+	if [ "$BOARD" = "odroidxu3" ] && [ "$DISTRO_VERSION" = "15.04" ]; then
+		apt-get -y install linux-headers-xu3
+	fi
+
 	if [ "$BOARD" = "odroidc" ]; then
 		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
 		return
