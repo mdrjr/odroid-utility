@@ -95,6 +95,13 @@ do_kernel_update() {
 			return
 		fi
 	fi
+	
+	if [ "$BOARD" = "odroidxu3" ] && [ "$DISTRO_VERSION" = "15.04" ]; then
+		apt-get -y update
+		apt-get -y dist-upgrade
+		apt-get -y install linux-image-xu3
+		msgbox "Your system is now up to date."
+	fi
 					
 	do_kernel_download
 	
