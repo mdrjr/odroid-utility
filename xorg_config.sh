@@ -8,7 +8,7 @@ xorg_config() {
 		3>&1 1>&2 2>&3)
 
 	ret=$?
-
+	
 	if [ $ret -eq 1 ]; then
 		return 0
 	elif [ $ret -eq 0 ]; then
@@ -24,24 +24,24 @@ xorg_config() {
 			*) ;;
 		esac
 	fi
-
+	
 }
 
 enable_xorg_at_boot() {
-
+	
 	if [ "$DISTRO" = "ubuntu" ]; then
 		rm -fr /etc/init/lightdm.override
 	elif [ "$DISTRO" = "debian" ]; then
 		update-rc.d lightdm enable 2 3 4 5
 	else
-
+	
 		xorg_err_not_supportted
-
+		
 	fi
 }
 
 disable_xorg_at_boot() {
-
+	
 	if [ "$DISTRO" = "ubuntu" ]; then
 		echo "manual" > /etc/init/lightdm.override
 	elif [ "$DISTRO" = "debian" ]; then
@@ -52,8 +52,8 @@ disable_xorg_at_boot() {
 
 	fi
 }
-
-
+	
+	
 xorg_err_not_supportted() {
 	whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --msgbox "XORG: Your distro isn't supportted. Report this on the forums" 0 0 0
 }
