@@ -35,6 +35,11 @@ initialization() {
                         exit 0
                         ;;
                 esac
+        
+        
+        # Given the many changes from Ubuntu 14.04 to 15.04 we need to be aware of the OS version in order to support it        
+		
+		export DISTRO_VERSION=`lsb_release -r | awk '{printf $2}'`
 
         # now that we know what we are running, lets grab all the OS Packages that we need.
 
