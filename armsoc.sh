@@ -9,7 +9,9 @@ rebuild_armsoc() {
 	fi
 	
 	if [ "$BOARD" = "odroidc" ]; then
-		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
+		apt-get -y update
+		apt-get -y dist-upgrade
+		msgbox "All updates performed. You don't need to run any other updates."
 		return
 	fi
 	
