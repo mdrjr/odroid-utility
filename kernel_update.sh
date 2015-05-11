@@ -108,6 +108,14 @@ do_kernel_update() {
 }
 
 do_firmware_update() {
+	
+	if [ "$BOARD" = "odroidxu3" ] && [ "$DISTRO_VERSION" = "15.04" ]; then
+		apt-get -y update
+		apt-get -y install linux-firmware
+		msgbox "linux-firmware package install or updated."
+		return
+	fi
+	
 	if [ "$BOARD" = "odroidc" ]; then
 		apt-get -y update
 		apt-get -y install linux-firmware
