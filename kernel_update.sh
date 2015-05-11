@@ -91,7 +91,10 @@ do_kernel_update() {
 					return
 				fi
 		else
-			msgbox "You are using a new and updated image. For now on. You don't need to update the kernel here anymore. 'apt-get update && apt-get dist-upgrade' are enough!"
+			apt-get -y update
+			apt-get -y dist-upgrade
+			apt-get -y install linux-image-c1
+			msgbox "Your system is now up to date."
 			return
 		fi
 	fi
@@ -101,6 +104,7 @@ do_kernel_update() {
 		apt-get -y dist-upgrade
 		apt-get -y install linux-image-xu3
 		msgbox "Your system is now up to date."
+		return
 	fi
 					
 	do_kernel_download
