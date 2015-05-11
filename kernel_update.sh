@@ -109,7 +109,9 @@ do_kernel_update() {
 
 do_firmware_update() {
 	if [ "$BOARD" = "odroidc" ]; then
-		msgbox "Please use apt-get update && apt-get dist-upgrade to upgrade your board."
+		apt-get -y update
+		apt-get -y install linux-firmware
+		msgbox "linux-firmware package install or updated."
 		return
 	fi
 
