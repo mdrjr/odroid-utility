@@ -58,6 +58,23 @@ p
 w
 EOF
 
+	if [ "$DISTRO_VERSION" = "15.04" ]; then
+	cat <<\EOF > /lib/systemd/system/fsresize.service
+[Unit]
+Description=Resize FS
+
+[Service]
+Type=simple
+ExecStart=/etc/init.d/resize2fs_once start
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+	systemctl enable fsresize
+	
+fi
+
 	cat <<\EOF > /etc/init.d/resize2fs_once
 #!/bin/sh
 ### BEGIN INIT INFO
@@ -89,6 +106,8 @@ EOF
 
   chmod +x /etc/init.d/resize2fs_once
   update-rc.d resize2fs_once defaults
+  
+  
   REBOOT=1
   
   msgbox "Rootfs Extended. Please reboot to take effect"
