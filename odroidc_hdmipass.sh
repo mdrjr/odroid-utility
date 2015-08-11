@@ -32,7 +32,7 @@ enable_c1_pass() {
 pcm.!default {
        type hw
         card 0
-        device 1
+        device 0
         format S16_LE
 }
 
@@ -50,7 +50,7 @@ disable_c1_pass() {
 pcm.!default {
   type plug
   slave {
-    pcm "hw:0,1"
+    pcm "hw:0,0"
   }
 }
 ctl.!default {
