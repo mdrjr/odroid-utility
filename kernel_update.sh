@@ -9,6 +9,7 @@ BOOT_SCR_UBUNTU_XU="http://builder.mdrjr.net/tools/boot.scr_ubuntu_xu.tar"
 BOOT_SCR_FEDORA20="http://builder.mdrjr.net/tools/boot.scr_fedora20.tar"
 BOOT_SCR_FEDORA20_XU="http://builder.mdrjr.net/tools/boot.scr_fedora20_xu.tar"
 BOOT_SCR_UBUNTU_XU3="http://builder.mdrjr.net/tools/odroidxu3.boot.ini"
+GOVERNOR_XU3="https://raw.githubusercontent.com/mdrjr/5422_bootini/master/ondemand"
 
 # Firmware
 FIRMWARE_URL="http://builder.mdrjr.net/tools/firmware.tar.xz"
@@ -164,6 +165,7 @@ do_bootscript_update() {
 				cp $KTMP/x/*.scr /media/boot
 			elif [ "$BOARD" = "odroidxu3" ]; then
 				dlf $BOOT_SCR_UBUNTU_XU3 "Updating boot.ini for ODROID-XU3" /media/boot/boot.ini
+				dlf $GOVERNOR_XU3 "Upading governor setup for ODROID-XU3" /etc/init.d/ondemand
 			fi
 			;;
 		"debian")
