@@ -44,7 +44,7 @@ enable_xorg_at_boot() {
 		update-rc.d lightdm enable 2 3 4 5
 	else
 	
-		xorg_err_not_supportted
+		xorg_err_not_supported
 		
 	fi
 }
@@ -64,12 +64,12 @@ disable_xorg_at_boot() {
 		update-rc.d lightdm disable 2 3 4 5
 	else
 
-		xorg_err_not_supportted
+		xorg_err_not_supported
 
 	fi
 }
 	
 	
-xorg_err_not_supportted() {
-	whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --msgbox "XORG: Your distro isn't supportted. Report this on the forums" 0 0 0
+xorg_err_not_supported() {
+	whiptail --backtitle "Hardkernel ODROID Utility v$_REV" --msgbox "XORG: Your distro isn't supported. Report this on the forums" 0 0 0
 }
