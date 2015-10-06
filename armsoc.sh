@@ -22,7 +22,7 @@ rebuild_armsoc() {
 	elif [ "$DISTRO" = "debian" ]; then
 		armsoc_rebuild_debian
 	else
-		armsoc_err_not_supportted
+		armsoc_err_not_supported
 	fi
 }
 
@@ -129,6 +129,6 @@ armsoc_rebuild_debian() {
 	msgbox "Mali is now updated. If something fails or isn't working report on the forums with the following file: $buildlog"
 }
 
-armsoc_err_not_supportted() {
-	msgbox "ARMSOC: Your distro isn't supportted. Report this on the forums -> Distro $DISTRO and board $BOARD"
+armsoc_err_not_supported() {
+	msgbox "ARMSOC: Your distro isn't supported. Report this on the forums -> Distro $DISTRO and board $BOARD"
 }
