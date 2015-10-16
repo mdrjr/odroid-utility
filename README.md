@@ -33,4 +33,4 @@ Don't worry about the extra files. The script self-updates itself everytime its 
 **TODO :**
 
 
-Ideas and patchs are welcome. Either post a diff with your e-mail and name or submit a PR on github.
+Ideas and patches are welcome. Either post a diff with your e-mail and name or submit a PR on github.
