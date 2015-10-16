@@ -41,7 +41,9 @@ ctl.!default {
         card 0
 }
 __EOF__
-	
+
+	sed -i '20s/.*/export AE_SINK=ALSA/' /usr/local/bin/kodi	
+
 	msgbox "HDMI Audio Passthrough is now enabled. Please reboot to take effect"
 }
 
@@ -59,6 +61,8 @@ ctl.!default {
 }
 __EOF__
 
+	sed -i '20s/.*//' /usr/local/bin/kodi
+	
 	msgbox "HDMI Audio Passthrough is now disabled. Please reboot to take effect"
 }
 
