@@ -39,7 +39,7 @@ resize_p2() {
 	
 	p2_start=`fdisk -l /dev/mmcblk0 | grep mmcblk0p2 | awk '{print $2}'`
 	
-	if [ "$DISTRO_VERSION" = "15.04" ]; then
+	if [ "$DISTRO_VERSION" = "15.04" ] || [ "$DISTRO_VERSION" = "15.10" ]; then
 		p2_finish=$((`fdisk -l /dev/mmcblk0 | grep Disk | grep sectors | awk '{printf $7}'` - 1024))
 	else
 		p2_finish=$((`fdisk -l /dev/mmcblk0 | grep total | grep sectors | awk '{printf $8}'` - 1024))
@@ -58,7 +58,7 @@ p
 w
 EOF
 
-	if [ "$DISTRO_VERSION" = "15.04" ]; then
+	if [ "$DISTRO_VERSION" = "15.04" ] || [ "$DISTRO_VERSION" = "15.10" ]; then
 	cat <<\EOF > /lib/systemd/system/fsresize.service
 [Unit]
 Description=Resize FS

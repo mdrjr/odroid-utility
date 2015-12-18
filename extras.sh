@@ -50,11 +50,13 @@ get_board() {
 
 
 do_5422_1504_apt_update() {
-	if [ "$BOARD" = "odroidxu3" ] && [ "$DISTRO_VERSION" = "15.04" ]; then
+	if [ "$BOARD" = "odroidxu3" ]; then
+	if [ "$DISTRO_VERSION" = "15.04" ] || [ "$DISTRO_VERSION" = "15.10" ]; then
 		apt-get -y update
 		apt-get -y dist-upgrade
 		apt-get -y install linux-image-xu3
 		msgbox "Your system is now up to date."
 		exit
+	fi
 	fi
 }

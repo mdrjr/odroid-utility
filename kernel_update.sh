@@ -466,8 +466,11 @@ update_hwclock() {
 install_headers() { 
 	do_5422_1504_apt_update
 	
-	if [ "$BOARD" = "odroidxu3" ] && [ "$DISTRO_VERSION" = "15.04" ]; then
+	if [ "$BOARD" = "odroidxu3" ]; then 
+	if [ "$DISTRO_VERSION" = "15.04" ] || [ "$DISTRO_VERSION" = "15.10" ]; then
 		apt-get -y install linux-headers-xu3
+		return
+	fi
 	fi
 
 	if [ "$BOARD" = "odroidc" ]; then

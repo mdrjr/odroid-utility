@@ -37,7 +37,7 @@ initialization() {
                 esac
         
         
-        # Given the many changes from Ubuntu 14.04 to 15.04 we need to be aware of the OS version in order to support it        
+        # Given the many changes from Ubuntu 14.04 to 15.04 / 15.10 we need to be aware of the OS version in order to support it        
 		
 		export DISTRO_VERSION=`lsb_release -r | awk '{printf $2}'`
 

@@ -33,9 +33,11 @@ xorg_config() {
 enable_xorg_at_boot() {
 	
 	# SystemD on Ubuntu 15.04
-	if [ "$BOARD" = "odroidxu3" ] && [ "$DISTRO_VERSION" = "15.04" ]; then
+	if [ "$BOARD" = "odroidxu3" ]; then
+	if [ "$DISTRO_VERSION" = "15.04" ] || [ "$DISTRO_VERSION" = "15.10" ]; then
 		systemctl set-default graphical.target
 		return
+	fi
 	fi
 	
 	if [ "$DISTRO" = "ubuntu" ]; then
@@ -52,9 +54,11 @@ enable_xorg_at_boot() {
 disable_xorg_at_boot() {
 
 	# SystemD on Ubuntu 15.04
-	if [ "$BOARD" = "odroidxu3" ] && [ "$DISTRO_VERSION" = "15.04" ]; then
+	if [ "$BOARD" = "odroidxu3" ];then
+	if [ "$DISTRO_VERSION" = "15.04" ] || [ "$DISTRO_VERSION" = "15.10" ]; then		
 		systemctl set-default multi-user.target
 		return
+	fi
 	fi
 
 	
