@@ -1,7 +1,7 @@
 TOOL - ODROID UTILITY
 =====================
 
-I've started to write this script to replace kernel-update. It does WAY more then the current kernel-update is doing. I plan to replace kernel-update with this tool very soon.
+I've started to write this script to replace kernel-update. It does WAY more than the current kernel-update is doing. I plan to replace kernel-update with this tool very soon.
 
 **Sources:** https://github.com/mdrjr/odroid-utility
 
@@ -17,7 +17,7 @@ chmod +x /usr/local/bin/odroid-utility.sh
 odroid-utility.sh
 ```
 
-Don't worry about the extra files. The script self-updates itself everytime its started.
+Don't worry about the extra files. The script self-updates itself everytime it's started.
 
 **What is supported :**
 
@@ -26,7 +26,7 @@ Don't worry about the extra files. The script self-updates itself everytime its 
 * Change hostname,
 * Configure HDMI (x/x2/u2/u3/c1) only,
 * Kernel Update (all boards),
-* boot.scr's update (all boards) Oh yes. Updating the kernel doesn't replace your boot.scr's anymore. If you was using custom ones to boot from hdd then they should be safe now,
+* boot.scr's update (all boards) Oh yes. Updating the kernel doesn't replace your boot.scr's anymore. If you were using custom ones to boot from hdd then they should be safe now,
 * Rebuilds Xorg DDX , installs new Mali drivers when they are available and fixes ABI errors,
 * Filesystem resize.
 
